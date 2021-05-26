@@ -60,8 +60,11 @@ foreach($row as $rows)
 <td class="table-dark"  data-target="progress"><?php echo $rows->progress?></td>  
 
 <td  class="table-warning">
-<a href='update/index?id=<?php echo $rows->id?>' >
+<!-- <a href='update?id=<?php //echo $rows->id?>' > -->
+<form action="<?= base_url().'update' ?>" method="post">
+<input type="hidden" name="updatename" value="<?php echo $rows->id?>">
 <button  class="btn btn-warning rounded-pill editbtn "  name="done" >Update </button>
+</form>
 </td>
 
 <td class="table-danger">

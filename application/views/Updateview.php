@@ -22,10 +22,10 @@ if(!isset($_SESSION["username"]))
   <div class="container ">
   <div class="row justify-content-center"> 
   <div class="col-md-6">
-	<form method="post" class="form-container2" action="<?php echo base_url('update/newupdate'); ?>" >
+	<form method="post" class="form-container2" action="<?php echo base_url().'update/newupdate' ?>" >
   
  <?php
-  foreach($row = $data as $row)
+  foreach($row = $data as $row) //trying to access non object
   {
   ?>
 

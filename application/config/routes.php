@@ -53,5 +53,6 @@ $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['(home:any)'] = 'home/index/$1';
-
+// $route['(home:any)'] = 'home/index/$1';
+// $route['(todo:any)'] = 'todo/update/$1';
+// $route['(update:any)'] = 'update/index/$1';
