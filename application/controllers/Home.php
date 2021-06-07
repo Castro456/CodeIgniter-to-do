@@ -63,7 +63,7 @@ class Home extends CI_Controller {
 			if($checkpass == $password){
 				echo "<div class='alert alert-success'> Success", "</div>";
 				$this->setsession();
-				redirect('loggeduser');
+				// redirect('loggeduser');
 			}
 
 			else {

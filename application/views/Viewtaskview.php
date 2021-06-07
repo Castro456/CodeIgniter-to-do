@@ -30,12 +30,13 @@ if(!isset($_SESSION["username"]))
 <table class="table table-hover table-light">
 <thead class="thead-dark">
 <tr>
-<th colspan="8" ><h1>Tasks</h1></th>
+<th colspan="9" ><h1>Tasks</h1></th>
 </tr>
 <tr>
   <th scope="col">No</th>
   <th scope="col">Task</th>
-  <th scope="col">Date/Time</th>
+  <th scope="col">Date</th>
+  <th scope="col">Time</th>
   <th scope="col">User</th>
   <th scope="col">Status</th>
   <th scope="col">Edit</th>
@@ -55,10 +56,11 @@ foreach($row as $rows)
 <tr id= "<?php   echo $rows->id ?>">
 <td class="table-dark" data-target="id"><?php echo $i ?></td>
 <td class="table-warning" data-target="task"><?php echo $rows->task ?></td>
-<td class="table-info" data-target="time"><?php echo $rows->time_kept ?></td>
+<td class="table-info" data-target="date"><?php echo date("d/m/Y", strtotime($rows->time_kept)) ?></td>
+<td class="table-warning" data-target="time"><?php echo date("H-i", strtotime($rows->time_kept)) ?></td>
 <td class="table-success"  data-target="username"><?php echo $rows->username ?></td>
 <td class="table-dark"  data-target="progress"><?php echo $rows->progress?></td>  
-
+<!-- date("d-m-Y", strtotime($rows->time_kept)) -->
 <td  class="table-warning">
 <!-- <a href='update?id=<?php //echo $rows->id?>' > -->
 <form action="<?= base_url().'update' ?>" method="post">
