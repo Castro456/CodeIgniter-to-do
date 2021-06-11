@@ -11,11 +11,13 @@ class Donetask extends CI_Controller {
 
   public function donedb()
   {
-    $done =$this->input->get('id');    
+    $done =$this->input->post('id');    
 		$this->load->model('donemodel'); 
     $response = $this->donemodel->index($done);
     if($response==true){
     redirect('viewtask');
+    // $this->load->view("viewtaskview");
+    echo "<div class='alert alert-success'> Done", "</div>";
   }
     else{
       return false;

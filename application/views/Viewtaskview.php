@@ -76,10 +76,14 @@ foreach($row as $rows)
 </a>
 </td>
 
+<!-- 
+<a href='donetask/donedb?id=<?php //echo $rows->id?>' > -->
 <td class="table-success">
-<a href='donetask/donedb?id=<?php echo $rows->id?>' >
+<form action="<?= base_url().'donetask/donedb' ?>" method="post">
+<input type="hidden" name="done" value="<?php echo $rows->id?>">
 <button  class="btn btn-success rounded-pill donebutton "  name="done" >Done </button>
-</a>
+<!-- </a> -->
+</form>
 </td>
 
 </tr>
