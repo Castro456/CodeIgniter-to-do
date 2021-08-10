@@ -7,11 +7,11 @@ class Home extends CI_Controller {
 	private $password;
 	private $result;
 
-	public function __construct()
-	{
-		parent::__construct();
-		$this->load->library('form_validation');	
-	}
+	// public function __construct()
+	// {
+	// 	parent::__construct();
+	//  $this->load->library('form_validation');	
+	// }
 	
 	public function index()
 	{
@@ -73,6 +73,7 @@ class Home extends CI_Controller {
 	}catch(Exception $e) {
 			echo  "<div class='alert alert-danger'> Message:"  .$e->getMessage();    
 			echo "</div>";
+			// show_error('UserName or Password is Incorrect',504,'Error');
 	}
 	}
 
@@ -86,7 +87,11 @@ class Home extends CI_Controller {
 	public function unset_session()
 	{
 		session_destroy();
-		redirect('home');
+		redirect('register');
+	}
+
+	public function display($tt){
+		echo $tt;
 	}
 
 }

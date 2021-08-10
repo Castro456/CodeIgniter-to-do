@@ -12,7 +12,7 @@ class Addmodel extends CI_Model{
     $data = array(
       'task' => $add,
       'user' => $userid,
-      'progress' => 2
+      'progress' => 1
     );
     $this->db->insert('task_table', $data);
   } 

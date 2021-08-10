@@ -10,20 +10,5 @@ class Viewtask extends CI_Controller {
     $this->load->view('viewtaskview',$data);
   }
 
-  //  public function donedb()
-  // {
-  //   $done =$this->input->post('id');    
-	// 	$this->load->model('donemodel'); 
-  //   $response = $this->donemodel->index($done);
-  //   if($response==true){
-  //   // redirect('viewtask');
-  //   $this->index();
-  //   echo "<div class='alert alert-success'> Done", "</div>";
-  // }
-  //   else{
-  //     return false;
-  //   }
-  // }
-  
 }
 ?>

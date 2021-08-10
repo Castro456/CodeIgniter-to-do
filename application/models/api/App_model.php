@@ -9,6 +9,14 @@ class App_model extends CI_Model{
     return $query->result();
   }
 
+    public function task_details($id){
+    $this->db->select('task, progress');
+    $this->db->from('task_table');
+    $this->db->where('id',$id);
+    $query = $this->db->get();
+    return $query->result();
+  }
+
   public function update_task($id,$task,$progress){
     $this->db->set('task', $task);
     $this->db->set('progress', $progress);

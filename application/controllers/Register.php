@@ -90,4 +90,8 @@ class Register extends CI_Controller {
       $this->registermodel->registeruser($name,$usrmail,$usrname,$usrpass,$usrdob,$usrage);
       
     }
+
+    public function display(){
+      echo "Happy";
+    }
 }

@@ -53,6 +53,15 @@ $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-// $route['(home:any)'] = 'home/index/$1';
+$route['api/task/views'] = 'api/To_do_list/view';
+$route['api/task/views/oneview/(:num)'] = 'api/To_do_list/views/$1';
+$route['api/task/deletetask'] = 'api/To_do_list/taskdelete';
+$route['api/task/updatetask'] = 'api/To_do_list/taskupdate';
+$route['api/task/taskadd'] = 'api/To_do_list/taskadd';
+// $route['to_do_list']['DELETE'] = 'to_do_list/delete';
+// $route['to_do_list/task_details/(:num)']['get'] = 'to_do_list/task_details/$1';
+
+// $route['home/(:any)'] = 'register/display';  //Corect
+// $route['home'] = 'register';// correct
 // $route['(todo:any)'] = 'todo/update/$1';
 // $route['(update:any)'] = 'update/index/$1';

@@ -57,7 +57,7 @@ foreach($row as $rows)
 <td class="table-dark" data-target="id"><?php echo $i ?></td>
 <td class="table-warning" data-target="task"><?php echo $rows->task ?></td>
 <td class="table-info" data-target="date"><?php echo date("d/m/Y", strtotime($rows->time_kept)) ?></td>
-<td class="table-warning" data-target="time"><?php echo date("H-i", strtotime($rows->time_kept)) ?></td>
+<td class="table-warning" data-target="time"><?php echo date("H : i", strtotime($rows->time_kept)) ?></td>
 <td class="table-success"  data-target="username"><?php echo $rows->username ?></td>
 <td class="table-dark"  data-target="progress"><?php echo $rows->progress?></td>  
 <!-- date("d-m-Y", strtotime($rows->time_kept)) -->
@@ -65,7 +65,7 @@ foreach($row as $rows)
 <!-- <a href='update?id=<?php //echo $rows->id?>' > -->
 <form action="<?= base_url().'update' ?>" method="post">
 <input type="hidden" name="updatename" value="<?php echo $rows->id?>">
-<button  class="btn btn-warning rounded-pill editbtn "  name="done" >Update </button>
+<button  class="btn btn-warning rounded-pill editbtn "  name="update" >Update </button>
 </form>
 </td>
 
@@ -79,8 +79,8 @@ foreach($row as $rows)
 <!-- 
 <a href='donetask/donedb?id=<?php //echo $rows->id?>' > -->
 <td class="table-success">
-<form action="<?= base_url().'donetask/donedb' ?>" method="post">
-<input type="hidden" name="done" value="<?php echo $rows->id?>">
+<form action="<?= base_url().'donetask' ?>" method="post">
+<input type="hidden" name="donevalue" value="<?php echo $rows->id?>">
 <button  class="btn btn-success rounded-pill donebutton "  name="done" >Done </button>
 <!-- </a> -->
 </form>

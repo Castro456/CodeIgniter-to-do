@@ -825,7 +825,9 @@ abstract class REST_Controller extends \CI_Controller {
 
         ob_end_flush();
 
-        // Otherwise dump the output automatically
+        // Otherwise dump the output automatically     
+      $this->output->_display();
+      exit;
     }
 
     /**

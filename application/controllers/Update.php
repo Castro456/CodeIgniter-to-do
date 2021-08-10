@@ -7,7 +7,6 @@ class Update extends CI_Controller {
 
   public function index()
   {
-    
     $id= $this->input->post('updatename');
     $this->taskid = $id; 
     $this->load->model('updatemodel');
