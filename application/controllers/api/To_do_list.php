@@ -15,7 +15,7 @@ class To_do_list extends REST_Controller {
   }
 
   /**
-   * Using GET request
+   * GET request
    * To get all the tasks with id,task,username.
    */
   public function view_get() {
