@@ -54,7 +54,7 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['api/task/views'] = 'api/To_do_list/view';
-$route['api/task/views/oneview/(:num)'] = 'api/To_do_list/views/$1';
+$route['api/task/views/oneview/(:num)'] = 'api/To_do_list/oneview/$1';
 $route['api/task/deletetask'] = 'api/To_do_list/taskdelete';
 $route['api/task/updatetask'] = 'api/To_do_list/taskupdate';
 $route['api/task/taskadd'] = 'api/To_do_list/taskadd';
