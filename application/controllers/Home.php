@@ -7,11 +7,11 @@ class Home extends CI_Controller {
 	private $password;
 	private $result;
 
-	// public function __construct()
-	// {
-	// 	parent::__construct();
-	//  $this->load->library('form_validation');	
-	// }
+	public function __construct()
+	{
+		parent::__construct();
+	 $this->load->library('form_validation');	
+	}
 	
 	public function index()
 	{

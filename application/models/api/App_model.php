@@ -18,11 +18,16 @@ class App_model extends CI_Model{
   }
 
   public function update_task($id,$task,$progress){
-    $this->db->set('task', $task);
-    $this->db->set('progress', $progress);
+    $data = array(
+        'task' => $task,
+        'progress' => $progress
+    );
     $this->db->where('id', $id);
-    $this->db->update('task_table'); 
-    return true;
+    if($this->db->update('task_table',$data)){
+      return TRUE;
+    }else {
+      return FALSE;
+    }
   }
 
   public function delete_task($taskid){
@@ -36,6 +41,10 @@ class App_model extends CI_Model{
       'user' => $userid,
       'progress' => $progress
     );
-    return $this->db->insert("task_table",$content);
+    if ($this->db->insert("task_table",$content)){
+      return TRUE;
+    }else {
+      return FALSE;
+    }
   }
 }
