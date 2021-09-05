@@ -1,10 +1,7 @@
-@media (min-width: 700px) {}
-
 body {
 	background: url(../images/simon.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
-	/* background-size: 100%; */
 }
 
 .pill1 {
