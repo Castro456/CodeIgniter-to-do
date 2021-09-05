@@ -7,10 +7,13 @@ class Viewtask extends CI_Controller {
   {
     $data['row'] = null;
     $data['message'] = $message;
-    if ($this->session->userdata('username')) {
+
+    if ($this->session->userdata('username')) 
+    {
       $username = $this->session->userdata('username');
       $this->load->model('viewmodel');
       $data['row'] = $this->viewmodel->viewdb($username);
+
       if ($data['row']) {
         $this->load->view('viewtaskview',$data);
       }
@@ -18,6 +21,7 @@ class Viewtask extends CI_Controller {
         $data['message'] = "Nothing to display add some Task";
         $this->load->view('viewtaskview',$data);
       }
+      
     }
     else {
       redirect('login','refresh');

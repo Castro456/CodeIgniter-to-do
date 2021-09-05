@@ -4,10 +4,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Add extends CI_Controller {
 
   public function __construct()
-	{
-		parent::__construct();
-		$this->load->library('form_validation');	
-	}
+  {
+    parent::__construct();
+    $this->load->library('form_validation');	
+  }
 
   public function index($message = null)
   {
@@ -26,10 +26,10 @@ class Add extends CI_Controller {
   {
     $this->form_validation->set_rules("taskadd","Task","required");
 
-			if ($this->form_validation->run() == FALSE)
-			{
+      if ($this->form_validation->run() == FALSE)
+      {
         $this->index();
-			}
+      }
       else {
         $add_task = $this->input->post('taskadd');
         $add_task   = trim($add_task);

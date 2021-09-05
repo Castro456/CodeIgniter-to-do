@@ -12,40 +12,40 @@ class Register extends CI_Controller {
   private $comparemail;
 
   public function __construct()
-	{
-		parent::__construct();
-		$this->load->library('form_validation');	
+  {
+    parent::__construct();
+    $this->load->library('form_validation');	
     $this->load->model('registermodel');
-	}
+  }
 
 
   public function index($message = null){
     $data['message'] = $message;
    if($this->session->userdata('username'))
-	 {
-		redirect('home','refresh');
-	 }
-	 else {
+   {
+    redirect('home','refresh');
+   }
+   else {
     $this->load->view("registerview", $data);
-	 }
+   }
   }
 
 
   public function loadregister()
   {
-    	$this->form_validation->set_rules("firstname","Name","required|alpha");
+      $this->form_validation->set_rules("firstname","Name","required|alpha");
       $this->form_validation->set_rules("email","Email","required|valid_email");
       $this->form_validation->set_rules("usr","UserName","required|alpha_numeric");
-			$this->form_validation->set_rules("psr","Password","required|alpha_numeric|min_length[6]");
+      $this->form_validation->set_rules("psr","Password","required|alpha_numeric|min_length[6]");
       $this->form_validation->set_rules("dob","DOB","required");
-			$this->form_validation->set_rules("age","Age","required|greater_than_equal_to[1]");
+      $this->form_validation->set_rules("age","Age","required|greater_than_equal_to[1]");
 
-			if ($this->form_validation->run() === FALSE)
-			{
+      if ($this->form_validation->run() === FALSE)
+      {
         $this->index();
-			}
-			else 
-			{
+      }
+      else 
+      {
       $password = $this->input->post('psr');
       $this->name = $this->input->post('firstname');
       $this->email = $this->input->post('email');
@@ -54,7 +54,7 @@ class Register extends CI_Controller {
       $this->dob = $this->input->post('dob');
       $this->age = $this->input->post('age');
       $this->verifyemail();
-			}
+      }
     }
 
 

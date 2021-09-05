@@ -8,10 +8,12 @@ class Registermodel extends CI_Model{
     $this->db->where('email',$email);
     $query = $this->db->get('users_table');
     $verify = $query->row_array();
-    if ($verify) {
+    if ($verify)
+    {
       return true;
     }
-    else {
+    else
+    {
       return false;
     }
   }
@@ -25,7 +27,8 @@ class Registermodel extends CI_Model{
       'pass_word' => $password,
       'dob' => $dob,
       'age' => $age
-);
+    );
+    
     return $this->db->insert('users_table', $data);
   }
 }

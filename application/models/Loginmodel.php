@@ -9,10 +9,12 @@ class Loginmodel extends CI_Model{
     $this->db->where('email', $check_email);
     $query = $this->db->get('users_table');
     $data = $query->row_array();
-    if ($data) {
+    if ($data)
+    {
       return true;
     }
-    else {
+    else
+    {
        return false;
     }
   }

@@ -2,11 +2,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Deletetask extends CI_Controller {
-	
-	public function index()
-	{
+  
+  public function index()
+  {
     $delete =$this->input->post('deteletask');    
-		$this->load->model('deletemodel'); 
+    $this->load->model('deletemodel'); 
     $response = $this->deletemodel->index($delete);
     if($response)
     {
@@ -16,6 +16,6 @@ class Deletetask extends CI_Controller {
       $data['message'] = "Unable to delete the Task";
       redirect('viewtask',$data);  
     }
-	}
+  }
 
 }
