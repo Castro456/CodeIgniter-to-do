@@ -1,25 +1,20 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Updatemodel extends CI_Model{
-  
-  public function index()
-  {
-    return "Models";
-  }
 
   public function updatedb($id)
   {
     $this->db->select('id, task');
     $this->db->where('id', $id);
     $query = $this->db->get('task_table');
-    return $query->result_array();
+    return $query->row_array();
   }
 
-  public function edit($idt,$task)
+  public function edit($id,$task)
   {
     $this->db->set('task', $task);
-    $this->db->where('id', $idt);
-    $this->db->update('task_table'); 
-  return true;
+    $this->db->where('id', $id);
+    return $this->db->update('task_table');
   }
 }

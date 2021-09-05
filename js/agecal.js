@@ -1,16 +1,20 @@
 
-function calculateAge(date) {
-  const now = new Date();
-  const diff = Math.abs(now - date);
-  const age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
-  return age
-}
+$(document).ready(function(){
+  $("#dob").on('change',function(){
 
-var picker = new Pikaday({
-  field: document.getElementById('dob'),
-  yearRange: [1900, 2020],
-  onSelect: function (date) {
-    var age = calculateAge(date);
-    document.getElementById('age').value = age;
-  }
+      var mdate = $("#dob").val().toString();
+
+      var yearThen = parseInt(mdate.substring(0,4), 10);
+      var monthThen = parseInt(mdate.substring(5,7), 10);
+      var dayThen = parseInt(mdate.substring(8,10), 10);
+
+      var today = new Date();
+      var birthday = new Date(yearThen, monthThen-1, dayThen);
+      
+      var differenceInMilisecond = today.valueOf() - birthday.valueOf();
+      
+      var year_age = Math.floor(differenceInMilisecond / 31536000000);
+
+      $("#calage").val(year_age);
+    });
 });

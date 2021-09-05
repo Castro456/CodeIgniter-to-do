@@ -1,4 +1,5 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Donemodel extends CI_Model{
   
@@ -6,8 +7,7 @@ class Donemodel extends CI_Model{
   {
     $this->db->set('progress', $progress);
     $this->db->where('id', $done);
-    $this->db->update('task_table'); 
-  return true;
- 
+    return $this->db->update('task_table'); 
   }
+
 }

@@ -1,30 +1,32 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Registermodel extends CI_Model{
 
-  public function index()
-  {
-    return "Models";
-  }
-
-  public function registeremail($email1){
+  public function registeremail($email){
     $this->db->select('email');
-    $this->db->where('email',$email1);
+    $this->db->where('email',$email);
     $query = $this->db->get('users_table');
-    return $query->result_array();
+    $verify = $query->row_array();
+    if ($verify) {
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 
-  public function registeruser($name,$usrmail,$usrname,$usrpass,$usrdob,$usrage)
+  public function registeruser($name,$email,$username,$password,$dob,$age)
   {
     $data = array(
       'firstname' => $name,
-      'email' => $usrmail,
-      'username' => $usrname,
-      'pass_word' => $usrpass,
-      'dob' => $usrdob,
-      'age' => $usrage
+      'email' => $email,
+      'username' => $username,
+      'pass_word' => $password,
+      'dob' => $dob,
+      'age' => $age
 );
-    $this->db->insert('users_table', $data);
+    return $this->db->insert('users_table', $data);
   }
 }
 

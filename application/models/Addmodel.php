@@ -1,19 +1,18 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Addmodel extends CI_Model{
 
-  public function index()
-  {
-    return "Models";
-  }
-
-  public function addtask($add,$userid)
+  public function addtask($add_task,$userid,$progress)
   {
     $data = array(
-      'task' => $add,
+      'task' => $add_task,
       'user' => $userid,
-      'progress' => 1
+      'progress' => $progress
     );
-    $this->db->insert('task_table', $data);
+
+    return $this->db->insert('task_table', $data);
   } 
-}?>
+
+}
+?>

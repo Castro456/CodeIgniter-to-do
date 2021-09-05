@@ -1,11 +1,3 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-if(isset($_SESSION["username"]))  
-{  
-  redirect('loggeduser');
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,65 +7,71 @@ if(isset($_SESSION["username"]))
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/bootstrap.min.css'); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/global.css'); ?>">  
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/pikaday.css'); ?>">
-    
-    <title>Register</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="icon" type="image/png" sizes="48x48" href="images/todolist.png"> 
+    <title>To-Do List</title>
 </head>
+
+ <?php
+ if (!empty($message)) { ?>
+     <div class="alert alert-danger pill2"> 
+    <i class="bi bi-x-circle"></i> <?php echo $message; 
+ }
+?>
 
 <body>
 
 <div class="container ">
 <div class="row justify-content-center"> 
 
-<form  class="form-container1" action="<?php echo base_url().'register/loadregister'?>" method="post">
-<!-- action="includes/register.includes.php" -->
+<form  class="form-container1" action="<?php echo base_url('register/loadregister')?>" method="post">
 
 <div class="form-row">
 <h1 class="text-dark">Register</h1>
 </div> 
 
 <div class="form-row">
-<p>Already has an Account....</p>
-<a href="<?php echo base_url().'home'?>">Login</a>
+<p>Already an user?</p>
+<a href="<?= base_url('login')?>">Login</a>
 </div> 
 
 <div class="form-row">
 <div class="col-md-6 mb-3">
-<label class="text-dark">Name</label>
-<input type="text" class="form-control firstname" name="firstname" placeholder="Enter your full name" value="<?= set_value('firstname')?>">
-<?php echo form_error("firstname","<div class='alert alert-danger'>","</div>") ?>
+<label class="text-dark">Firstname</label>
+<input type="text" class="form-control" name="firstname" placeholder="Enter your first name" value="<?= set_value('firstname')?>">
+<?php echo form_error("firstname","<p class='text-danger'>","</p>") ?>
 </div>
 
 <div class="col-md-6 mb-3">
 <label class="text-dark">Email</label>
-<input type="text" class="form-control email" name="email" placeholder="Enter your email address" value="<?= set_value('email')?>">
-<?php echo form_error("email","<div class='alert alert-danger'>","</div>") ?>
+<input type="text" class="form-control" name="email" placeholder="Enter your email address" value="<?= set_value('email')?>">
+<?php echo form_error("email","<p class='text-danger'>","</p>") ?>
 </div>
 </div>
 
 <div class="form-row">
 <div class="col-md-6 mb-3">
-<label class="text-dark">UserName</label>
-<input type="text" class="form-control usr" name="usr" placeholder="Provide a Username maximum of 6 characters" value="<?= set_value('usr')?>">
-<?php echo form_error("usr","<div class='alert alert-danger'>","</div>") ?>
+<label class="text-dark">Username</label>
+<input type="text" class="form-control" name="usr" placeholder="Provide a Username maximum of 6 characters" value="<?= set_value('usr')?>">
+<?php echo form_error("usr","<p class='text-danger'>","</p>") ?>
 </div>
 
 <div class="col-md-3 mb-3">
 <label class="text-dark">Password</label>
-<input type="password" class="form-control psr" name="psr" placeholder="Exact of 6 characters" value="<?= set_value('psr')?>">
-<?php echo form_error("psr","<div class='alert alert-danger'>","</div>") ?>
+<input type="password" class="form-control" name="psr" placeholder="Mininum of 6 characters" value="<?= set_value('psr')?>">
+<?php echo form_error("psr","<p class='text-danger'>","</p>") ?>
 </div>
 
 <div class="col-md-3 mb-3">
 <label class="text-dark">DateofBirth</label>
-<input type="text" class="form-control  dob1" id="dob" name="dob" readonly placeholder="Provide your DOB" value="<?= set_value('dob')?>">
-<?php echo form_error("dob","<div class='alert alert-danger'>","</div>") ?>
+<input type="date" class="form-control" id="dob" name="dob"  placeholder="Provide your DOB" value="<?= set_value('dob')?>">
+<?php echo form_error("dob","<p class='text-danger'>","</p>") ?>
 </div>
 
 <div class="col-md-3 mb-3">
 <label class="text-dark">Age</label>
-<input type="text" class="form-control age" id="age" name="age" placeholder="Age must be atleast 1" readonly value="<?= set_value('age')?>">
-<?php echo form_error("age","<div class='alert alert-danger'>","</div>") ?>
+<input type="text" class="form-control" id="calage" name="age" readonly placeholder="Age must be atleast 1"  value="<?= set_value('age')?>">
+<?php echo form_error("age","<p class='text-danger'>","</p>") ?>
 </div>
 </div>
 
@@ -85,12 +83,10 @@ if(isset($_SESSION["username"]))
 </div>
 </form>
 
-<script src="<?php echo base_url('./js/pikaday.js'); ?>">
+<script src="https://code.jquery.com/jquery-latest.min.js">
 </script>
-
 <script src="<?php echo base_url('./js/agecal.js'); ?>">
 </script>
-
 
 </body>
 </html>

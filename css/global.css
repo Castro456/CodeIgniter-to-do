@@ -1,163 +1,210 @@
+@media (min-width: 700px) {}
 
-body
-{
-      background:url(../images/final.jpeg);
-      /* background-position: initial; */
-      background-repeat: no-repeat;
-      background-size: 100%;
+body {
+	background: url(../images/simon.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	/* background-size: 100%; */
 }
-.form-container
-{
-    position: fixed ;
-    top: 20vh;
-    background-color:transparent !important;
-    padding: 80px;
-    border-radius: 50px;
-    box-shadow: 0px 0px 10px;
+
+.pill1 {
+	text-align: center;
+	top: 5vh;
+	left: 24%;
+	width: 800px;
+	height: 50px;
+	border-radius: 48px;
 }
-.form-container1
-{
-    position: fixed;
-    top: 10vh;
-    background-color:transparent !important;
-    padding: 70px;
-    border-radius: 50px;
-    box-shadow: 0px 0px 10px;
+
+.pill2 {
+	text-align: center;
+	top: 3vh;
+	left: 24%;
+	width: 800px;
+	height: 50px;
+	border-radius: 48px;
 }
-.text-correct
-{
-    margin-top: 200px !important;
-    text-align: center;
-    /* text-transform: uppercase; */
-       
+
+.form-container {
+	position: fixed;
+	top: 18vh;
+	left: 38%;
+	background-color: transparent !important;
+	padding: 20px 80px 30px 80px;
+	border-radius: 48px;
+	box-shadow: 0px 0px 10px;
 }
-.log
-{
-    position: fixed;
-    padding: 20px;
-    top: 20vh;
+
+.sign {
+	justify-content: center;
 }
-.form-control
-{
-    background-color:transparent;
-    border-radius: 100px;
-    /* border: 10px black;
+
+.form-container1 {
+	position: fixed;
+	top: 13vh;
+	background-color: transparent !important;
+	padding: 70px;
+	border-radius: 50px;
+	box-shadow: 0px 0px 10px;
+}
+
+.text-correct {
+	margin-top: 200px !important;
+	text-align: center;
+	/* text-transform: uppercase; */
+
+}
+
+.log {
+	position: fixed;
+	padding: 20px;
+	top: 20vh;
+}
+
+.form-control {
+	background-color: transparent;
+	border-radius: 100px;
+	/* border: 10px black;
     border-width: 10px ; */
-    border-color: #111111; 
+	border-color: #111111;
 }
-.small
-{
-    color: brown;
+
+.small {
+	color: brown;
 }
+
 .button {
-    background-color: #FF6961; 
-    border: none;
-    border-radius: 80px;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-  }
-  .button1 {
-    background-color:#90EE90; 
-    border: none;
-    border-radius: 80px;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-  }
-  .addbtn {
-    background-color: #FFB6C1; 
-    position: absolute ;
-    top: 65%;
-    left: 39%;
-    border: none;
-    border-radius: 40px;
-    color: black;
-    padding: 10px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-  }
-  .add-container
-{
-    position: fixed;
-    top: 24vh;
-    background-color:transparent !important;
-    padding: 90px;
-    border-radius: 50px;
-    box-shadow: 0px 0px 10px;
-}
-.form-controladd
-{
-    background-color:transparent;
-    border-radius: 5px;
-    width: 300px;
-    height: 100px;
-    /* border: 10px black;
-    border-width: 10px ; */
-    border-color: #FF6961; 
-}
-.editbtns
-{
-    background-color: #e3f035; 
-    position: fixed ;
-    /* top: 65%;
-    left: 39%; */
-    border: none;
-    border-radius: 40px;
-    color: black;
-    padding: 4px 25px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 13px;
-}
-.deletebtns
-{
-    background-color: #FF0000; 
-    position: fixed ;
-    /* top: 65%;
-    left: 39%; */
-    border: none;
-    border-radius: 40px;
-    color: black;
-    padding: 4px 25px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 13px;
-}
-.donebuttons
-{
-    background-color: #4bcc4b; 
-    position: fixed ;
-    /* top: 65%;
-    left: 39%; */
-    border: none;
-    border-radius: 40px;
-    color: black;
-    padding: 4px 25px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 13px;
+	background-color: #FF6961;
+	border: none;
+	border-radius: 80px;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
 }
 
-.form-container2
-{
-    position: fixed ;
-    top: 33vh;
-    background-color:transparent !important;
-    padding: 80px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px;
-    margin-left: auto;
-    margin-right: auto;
+.button1 {
+	background-color: #90EE90;
+	border: none;
+	border-radius: 80px;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
 }
+
+.addbtn {
+	background-color: #48ee56;
+	position: absolute;
+	top: 65%;
+	left: 39%;
+	border: none;
+	border-radius: 40px;
+	color: black;
+	padding: 10px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+}
+
+.add-container {
+	position: fixed;
+	top: 24vh;
+	background-color: transparent !important;
+	padding: 90px;
+	border-radius: 50px;
+	box-shadow: 0px 0px 10px;
+}
+
+.form-controladd {
+	background-color: transparent;
+	border-radius: 5px;
+	width: 300px;
+	height: 100px;
+	/* border: 10px black;
+    border-width: 10px ; */
+	border-color: #090e06;
+}
+
+.editbtns {
+	background-color: #e3f035;
+	position: fixed;
+	/* top: 65%;
+    left: 39%; */
+	border: none;
+	border-radius: 40px;
+	color: black;
+	padding: 4px 25px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 10px;
+}
+
+.deletebtns {
+	background-color: #FF0000;
+	position: fixed;
+	/* top: 65%;
+    left: 39%; */
+	border: none;
+	border-radius: 40px;
+	color: black;
+	padding: 4px 25px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 10px;
+}
+
+.donebuttons {
+	background-color: #4bcc4b;
+	position: fixed;
+	/* top: 65%;
+    left: 39%; */
+	border: none;
+	border-radius: 40px;
+	color: black;
+	padding: 4px 25px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 10px;
+}
+
+.form-container2 {
+	position: fixed;
+	top: 33vh;
+	left: 52vh;
+	width: 50%;
+	background-color: transparent !important;
+	padding: 100px;
+	border-radius: 50px;
+	box-shadow: 0px 0px 10px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.viewnav {
+	margin-bottom: 2vh;
+}
+
+.taskcenter {
+	text-align: center;
+}
+
+.space {
+	margin: 5px;
+}
+
+.update {
+	position: relative;
+	top: 25vh;
+	left: 20vh;
+	width: 90%;
+}
+

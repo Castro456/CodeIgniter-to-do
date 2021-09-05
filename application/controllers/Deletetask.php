@@ -5,21 +5,17 @@ class Deletetask extends CI_Controller {
 	
 	public function index()
 	{
-    
-     echo ('Model');
-	}
-
-  public function deletedb()
-  {
-    $del =$this->input->get('id');    
+    $delete =$this->input->post('deteletask');    
 		$this->load->model('deletemodel'); 
-    $response = $this->deletemodel->index($del);
-    if($response==true){
-    redirect('viewtask');
-  }
-    else{
-      return false;
+    $response = $this->deletemodel->index($delete);
+    if($response)
+    {
+      redirect('viewtask');
     }
-  }
+    else{
+      $data['message'] = "Unable to delete the Task";
+      redirect('viewtask',$data);  
+    }
+	}
 
 }
