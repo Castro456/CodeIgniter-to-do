@@ -1,67 +1,18 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-/*
-| -------------------------------------------------------------------------
-| URI ROUTING
-| -------------------------------------------------------------------------
-| This file lets you re-map URI requests to specific controller functions.
-|
-| Typically there is a one-to-one relationship between a URL string
-| and its corresponding controller class/method. The segments in a
-| URL normally follow this pattern:
-|
-|	example.com/class/method/id/
-|
-| In some instances, however, you may want to remap this relationship
-| so that a different class/function is called than the one
-| corresponding to the URL.
-|
-| Please see the user guide for complete details:
-|
-|	https://codeigniter.com/user_guide/general/routing.html
-|
-| -------------------------------------------------------------------------
-| RESERVED ROUTES
-| -------------------------------------------------------------------------
-|
-| There are three reserved routes:
-|
-|	$route['default_controller'] = 'welcome';
-|
-| This route indicates which controller class should be loaded if the
-| URI contains no data. In the above example, the "welcome" class
-| would be loaded.
-|
-|	$route['404_override'] = 'errors/page_missing';
-|
-| This route will tell the Router which controller/method to use if those
-| provided in the URL cannot be matched to a valid route.
-|
-|	$route['translate_uri_dashes'] = FALSE;
-|
-| This is not exactly a route, but allows you to automatically route
-| controller and method names that contain dashes. '-' isn't a valid
-| class or method name character, so it requires translation.
-| When you set this option to TRUE, it will replace ALL dashes in the
-| controller and method URI segments.
-|
-| Examples:	my-controller/index	-> my_controller/index
-|		my-controller/my-method	-> my_controller/my_method
-*/
+/*Task API */
+$route['api/task/views'] = 'api/Tasks_api/view';
+$route['api/task/views/view/(:num)'] = 'api/Tasks_api/oneview/$1';
+$route['api/task/delete'] = 'api/Tasks_api/taskdelete';
+$route['api/task/update'] = 'api/Tasks_api/taskupdate';
+$route['api/task/add'] = 'api/Tasks_api/taskadd';
+$route['api/task/status'] = 'api/Tasks_api/task_status';
+
+/*Default Controller */
 $route['default_controller'] = 'login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['api/task/views'] = 'api/To_do_list/view';
-$route['api/task/views/oneview/(:num)'] = 'api/To_do_list/oneview/$1';
-$route['api/task/deletetask'] = 'api/To_do_list/taskdelete';
-$route['api/task/updatetask'] = 'api/To_do_list/taskupdate';
-$route['api/task/taskadd'] = 'api/To_do_list/taskadd';
-// $route['to_do_list']['DELETE'] = 'to_do_list/delete';
-// $route['to_do_list/task_details/(:num)']['get'] = 'to_do_list/task_details/$1';
-
-// $route['home/(:any)'] = 'register/display';  //Corect
+/*Login routes */
 $route['login/auth'] = 'login/loadlogin';
-// $route['(todo:any)'] = 'todo/update/$1';
-// $route['(update:any)'] = 'update/index/$1';
