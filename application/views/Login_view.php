@@ -5,11 +5,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <link rel="stylesheet" type="text/css" href="<?= base_url('css/bootstrap.min.css'); ?>">
-    <link rel="stylesheet" type="text/css" href="<?= base_url('css/global.css') ?>">
+    <base href="<?= base_url(); ?>">
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/global.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link rel="icon" type="image/png" sizes="48x48" href="images/todolist.png">
+    <link rel="icon" type="image/png"  href="images/todoapp.png">
+
     <title>To-Do List</title>
+
 </head>
 
 <?php 
@@ -24,7 +28,7 @@
 <div class="container ">
 <div class="col-md-4">
 
-<form class="form-container needs-validation"  action="<?= base_url('login/auth')?>" method="post">
+<form class="form-container needs-validation"  action="<?= base_url('login/authentication')?>" method="post">
 
 <div class="form-group">         
   <h1 class="text-dark">Login</h1>
@@ -54,7 +58,7 @@
 
 <div class="form-row sign">
 <p>First time here?</p>
-<a href="<?= base_url('register')?>"> SignUp</a>
+<a  style="text-decoration:none" href="register">&nbsp <font color="green"; text-decoration: none;>SignUp</font></a>
 </div>
 
 </div>

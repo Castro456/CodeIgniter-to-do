@@ -50,7 +50,7 @@ class Register extends CI_Controller {
       $this->name = $this->input->post('firstname');
       $this->email = $this->input->post('email');
       $this->user = $this->input->post('usr');
-      $this->pass = md5($password);
+      $this->pass = password_hash($password, PASSWORD_DEFAULT);
       $this->dob = $this->input->post('dob');
       $this->age = $this->input->post('age');
       $this->verifyemail();

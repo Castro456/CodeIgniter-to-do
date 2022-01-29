@@ -5,11 +5,14 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>To-Do List</title>
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/global.css'); ?>">
-<link rel="stylesheet" href="<?php echo base_url('css/bootstrap.min.css'); ?>">
+<base href="<?= base_url(); ?>">
+
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/global.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-<link rel="icon" type="image/png" sizes="48x48" href="images/todolist.png">
+<link rel="icon" type="image/png"  href="images/todoapp.png">
+
+<title>To-Do List</title>
 
 </head>
 
