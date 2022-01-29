@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Deletemodel extends CI_Model{
+class Delete_model extends CI_Model{
 
   public function index($delete)
   {

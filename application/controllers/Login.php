@@ -133,7 +133,7 @@ class Login extends CI_Controller {
     $user_data = $this->user_details;
 
     $session_data = array(
-      'user_id' => $this->user_id,
+      'user_id' => $user_data['id'],
       'user_fname' => $user_data['firstname'],
       "user_email" => $this->user_email,
       "user_name" => $user_data['username'],

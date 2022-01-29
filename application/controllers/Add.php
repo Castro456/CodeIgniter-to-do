@@ -3,54 +3,78 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Add extends CI_Controller {
 
+
   public function __construct()
   {
     parent::__construct();
     $this->load->library('form_validation');	
   }
 
+
   public function index($message = null)
   {
+
     $data['message'] = $message;
 
-    if($this->session->userdata('username'))
+    if($this->session->userdata('user_name'))
     {
-      $this->load->view('addview',$data); 
+      $this->load->view('add_view',$data); 
     }
-    else {
+
+    else 
+    {
       redirect('login','refresh');
     }
+
   }
 
-  public function addfetch()
+
+  public function user_task()
   {
-    $this->form_validation->set_rules("taskadd","Task","required");
 
-      if ($this->form_validation->run() == FALSE)
+    $this->form_validation->set_rules("task","Task","required");
+
+    if ($this->form_validation->run() == FALSE)
+    {
+      $this->index();
+    }
+
+    else 
+    {
+
+      $add_task = $this->input->post('task');
+      $add_task   = trim($add_task);
+      $add_task   = $this->security->xss_clean($add_task);
+
+      if (!isset($add_task))
       {
-        $this->index();
+        $message = "Enter a Task";
+        $this->index($message);
       }
-      else {
-        $add_task = $this->input->post('taskadd');
-        $add_task   = trim($add_task);
-        $add_task   = $this->security->xss_clean($add_task);
-
-        $userid = $this->session->userdata('id');
+      else 
+      {
+        $user_id = $this->session->userdata('user_id');
 
         $progress = 1;
 
-        $this->load->model('addmodel');
-        $verify = $this->addmodel->addtask($add_task,$userid,$progress);
+        $this->load->model('add_model');
+        $verify = $this->add_model->add_task($add_task,$user_id,$progress);
 
-        if ($verify) {
+        if ($verify)
+        {
           $message = "Task Added";
           $this->index($message);
         }
-        else {
+
+        else 
+        {
           $message = "Task not added";
           $this->index($message);
         }
+
       }
+
+    }
 
   }
 

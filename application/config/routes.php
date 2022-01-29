@@ -15,4 +15,4 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 /*Login routes */
-$route['login/auth'] = 'login/loadlogin';
+// $route['login/auth'] = 'login/loadlogin';

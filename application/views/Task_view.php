@@ -17,13 +17,13 @@
 </head>
 
 <nav class="navbar navbar-light bg-light viewnav" style="background-color: #CAE9F5">
-    <a class="navbar-brand" href="<?php echo base_url('home');?>"><i class="bi bi-arrow-left-circle"></i>  Back</a>
+    <a class="navbar-brand" href="home"><i class="bi bi-arrow-left-circle"></i>  Back</a>
     <div class="justify-content-end">
       <img src="images/man.png" alt="" width="30" height="24" class="d-inline-block align-text-end ">
-      <?php echo "  ".$this->session->userdata('username') ?>
+      <?php echo "  ".$this->session->userdata('user_name') ?>
       <a class="navbar-brand" href="#"></a>
       <a class="navbar-brand" href="#"></a>
-      <a class="btn btn-danger my-2 my-sm-0 rounded-pill" href="<?= base_url('login/unset_session') ?>" role="button"><i class="bi bi-box-arrow-right"></i> Logout</a>
+      <a class="btn btn-danger my-2 my-sm-0 rounded-pill" href="login/unset_session" role="button"><i class="bi bi-box-arrow-right"></i> Logout</a>
     </div>
 </nav>
 
@@ -50,38 +50,48 @@
 
 <tbody id="table" >
 
+
 <?php
 if (empty($message)) {
  $i=1;
  foreach($row as $rows)  
  {  
 ?>
+
   <tr id= "<?php   echo $rows->id ?>">
 
+  <!-- Datum -->
   <td class="table-light taskcenter" data-target="id"><?php echo $i ?></td>
   <td class="table-light taskcenter" data-target="task"><?php echo $rows->task ?></td>
   <td class="table-light taskcenter" data-target="date"><?php echo date("d/m/Y", strtotime($rows->time_kept)) ?></td>
   <td class="table-light taskcenter" data-target="time"><?php echo date("H:i", strtotime($rows->time_kept)) ?></td>
   <td class="table-light taskcenter"  data-target="username"><?php echo $rows->username ?></td>
   <td class="table-light taskcenter"  data-target="progress"><?php echo $rows->progress?></td>  
+
+   <!-- Update Task -->
   <td  class="table-light taskcenter">
-  <form action="<?= base_url('update')?>" method="post">
-  <input type="hidden" name="updatename" value="<?php echo $rows->id?>">
+  <form action="update" method="post">
+  <input type="hidden" name="update_id" value="<?php echo $rows->id?>">
   <button  class="btn btn-warning"  name="update" type="submit" ><i class="bi bi-pencil"></i></button>
   </form>
   </td>
+
+  <!-- Delete Task -->
   <td class="table-light taskcenter">
-  <form action="<?= base_url('deletetask')?>" method="post"> 
-  <input type="hidden" name="deteletask" value="<?php echo $rows->id?>">
+  <form action="delete_task" method="post"> 
+  <input type="hidden" name="delete_id" value="<?php echo $rows->id?>">
   <button  class="btn btn-danger" name="delete" ><i class="bi bi-x"></i></button>
   </form>
   </td>
+
+  <!-- Done Task -->
   <td class="table-light taskcenter">
-  <form action="<?= base_url('donetask') ?>" method="post">
-  <input type="hidden" name="donevalue" value="<?php echo $rows->id?>">
+  <form action="done_task" method="post">
+  <input type="hidden" name="done_id" value="<?php echo $rows->id?>">
   <button  class="btn btn-success"  name="done" ><i class="bi bi-check2"></i></button>
   </form>
   </td>
+
 
   </tr>
 <?php

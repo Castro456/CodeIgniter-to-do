@@ -1,9 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Updatemodel extends CI_Model{
+class Update_model extends CI_Model
+{
 
-  public function updatedb($id)
+  public function get_task($id)
   {
     $this->db->select('id, task');
     $this->db->where('id', $id);
@@ -11,10 +12,11 @@ class Updatemodel extends CI_Model{
     return $query->row_array();
   }
 
-  public function edit($id,$task)
+  public function update_task($id,$task)
   {
     $this->db->set('task', $task);
     $this->db->where('id', $id);
     return $this->db->update('task_table');
   }
+
 }

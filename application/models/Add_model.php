@@ -1,13 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Addmodel extends CI_Model{
 
-  public function addtask($add_task,$userid,$progress)
+class Add_model extends CI_Model{
+
+
+  public function add_task($add_task,$user_id,$progress)
   {
     $data = array(
       'task' => $add_task,
-      'user' => $userid,
+      'user' => $user_id,
       'progress' => $progress
     );
 

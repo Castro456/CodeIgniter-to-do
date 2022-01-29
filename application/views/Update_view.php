@@ -17,13 +17,14 @@
 </head>
 
  <nav class="navbar navbar-light bg-light viewnav" style="background-color: #CAE9F5">
-    <a class="navbar-brand" href="<?php echo base_url('viewtask');?>"><i class="bi bi-arrow-left-circle"></i>  Back</a>
+    <a class="navbar-brand" href="view_task"><i class="bi bi-arrow-left-circle">
+    </i>Back</a>
     <div class="justify-content-end">
       <img src="images/man.png" alt="" width="30" height="24" class="d-inline-block align-text-end ">
-      <?php echo "  ".$this->session->userdata('username') ?>
+      <?php echo "  ".$this->session->userdata('user_name') ?>
       <a class="navbar-brand" href="#"></a>
       <a class="navbar-brand" href="#"></a>
-      <a class="btn btn-danger my-2 my-sm-0 rounded-pill" href="<?= base_url('login/unset_session') ?>" role="button"><i class="bi bi-box-arrow-right"></i> Logout</a>
+      <a class="btn btn-danger my-2 my-sm-0 rounded-pill" href="login/unset_session" role="button"><i class="bi bi-box-arrow-right"></i> Logout</a>
     </div>
 </nav>
 
@@ -31,10 +32,10 @@
   <div class="container">
   <div class="col-md-10">
 
-	<form method="post" class="update" action="<?php echo base_url('update/updatetask')?>" > 
+	<form method="post" class="update" action="<?php echo base_url('update/edit_task')?>" > 
 
   <div class="form-group">         
-  <h1 class="text-dark">Edit</h1>
+  <h1 class="text-dark">Edit Task</h1>
   </div>
   <div class="input-group input-group-lg">
   <input type="text" class="form-control" name="task" value="<?php echo $data['task'] ?>">

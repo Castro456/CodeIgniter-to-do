@@ -1,16 +1,18 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Viewmodel extends CI_Model{
+class View_model extends CI_Model{
 
-  public function viewdb($username)
+  public function view_data($user_id)
   {
+
     $this->db->select('task.id, task, time_kept, progress, username');
     $this->db->from('task_table task');
-    $this->db->where('username',$username);
+    $this->db->where('user.id',$user_id);
     $this->db->join('users_table user','task.user = user.id'); 
     $query = $this->db->get();
     return $query->result();
+
   }
 
 }

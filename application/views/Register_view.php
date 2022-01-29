@@ -27,7 +27,7 @@
 <div class="container ">
 <div class="row justify-content-center"> 
 
-<form  class="form-container1" action="<?php echo base_url('register/loadregister')?>" method="post">
+<form  class="form-container1" action="register/validate" method="post">
 
 <div class="form-row">
 <h1 class="text-dark">Register</h1>

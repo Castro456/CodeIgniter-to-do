@@ -8,9 +8,11 @@ class Home extends CI_Controller {
 
    if($this->session->userdata('user_name'))
    {
-     $this->load->view('homeview'); 
+     $this->load->view('home_view'); 
    }
-   else {
+
+   else 
+   {
      redirect('login','refresh');
    }
 

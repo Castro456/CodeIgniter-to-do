@@ -28,7 +28,7 @@
 <div class="container ">
 <div class="col-md-4">
 
-<form class="form-container needs-validation"  action="<?= base_url('login/authentication')?>" method="post">
+<form class="form-container needs-validation"  action="login/authentication" method="post">
 
 <div class="form-group">         
   <h1 class="text-dark">Login</h1>

@@ -1,38 +1,46 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+
 class Register extends CI_Controller {
 
   private $name;
   private $email;
-  private $user;
-  private $pass;
+  private $user_name;
+  private $password;
   private $dob;
   private $age;
-  private $comparemail;
+
 
   public function __construct()
   {
     parent::__construct();
     $this->load->library('form_validation');	
-    $this->load->model('registermodel');
+    $this->load->model('register_model');
   }
 
 
-  public function index($message = null){
-    $data['message'] = $message;
-   if($this->session->userdata('username'))
+  public function index($message = null)
+  {
+
+   $data['message'] = $message;
+
+   if($this->session->userdata('user_name'))
    {
     redirect('home','refresh');
    }
-   else {
-    $this->load->view("registerview", $data);
+
+   else
+   {
+    $this->load->view("register_view", $data);
    }
+
   }
 
 
-  public function loadregister()
+  public function validate()
   {
+
       $this->form_validation->set_rules("firstname","Name","required|alpha");
       $this->form_validation->set_rules("email","Email","required|valid_email");
       $this->form_validation->set_rules("usr","UserName","required|alpha_numeric");
@@ -44,45 +52,58 @@ class Register extends CI_Controller {
       {
         $this->index();
       }
+
       else 
       {
-      $password = $this->input->post('psr');
-      $this->name = $this->input->post('firstname');
-      $this->email = $this->input->post('email');
-      $this->user = $this->input->post('usr');
-      $this->pass = password_hash($password, PASSWORD_DEFAULT);
-      $this->dob = $this->input->post('dob');
-      $this->age = $this->input->post('age');
-      $this->verifyemail();
+        $password = $this->input->post('psr');
+        $this->name = $this->input->post('firstname');
+        $this->email = $this->input->post('email');
+        $this->user_name = $this->input->post('usr');
+        $this->password = password_hash($password, PASSWORD_DEFAULT);
+        $this->dob = $this->input->post('dob');
+        $this->age = $this->input->post('age');
+        $this->email_verification();
       }
+
     }
 
 
-    public function verifyemail()
+    public function email_verification()
     {
-      $email = $this->email;
-      $check = $this->registermodel->registeremail($email);
 
-      if ($check) {
+      $email = $this->email;
+      $check = $this->register_model->check_existing_email($email);
+
+      if($check)
+      {
         $message = "Entered Email already exists";
         $this->index($message);
       }
-      else {
-        $this->datainsert();
+
+      else 
+      {
+        $this->register_user();
       }
+
     }
 
 
-    public function datainsert()
+    public function register_user()
     {
-      $create = $this->registermodel->registeruser($this->name,$this->email,$this->user,$this->pass,$this->dob,$this->age);
-      if ($create) {
+
+      $create = $this->register_model->add_user($this->name,$this->email,$this->user_name,$this->password,$this->dob,$this->age);
+
+      if($create)
+      {
         redirect('login', 'refresh');
       }
-      else {
+
+      else 
+      {
         $msg = "Registration Unsuccessful";
         $this->index($message);
       }
+
     }
 
 

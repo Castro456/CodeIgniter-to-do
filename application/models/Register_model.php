@@ -1,25 +1,33 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Registermodel extends CI_Model{
 
-  public function registeremail($email){
+class Register_model extends CI_Model{
+
+
+  public function check_existing_email($email)
+  {
     $this->db->select('email');
     $this->db->where('email',$email);
     $query = $this->db->get('users_table');
     $verify = $query->row_array();
+
     if ($verify)
     {
       return true;
     }
+
     else
     {
       return false;
     }
+
   }
 
-  public function registeruser($name,$email,$username,$password,$dob,$age)
+
+  public function add_user($name,$email,$username,$password,$dob,$age)
   {
+
     $data = array(
       'firstname' => $name,
       'email' => $email,
@@ -30,6 +38,7 @@ class Registermodel extends CI_Model{
     );
     
     return $this->db->insert('users_table', $data);
+
   }
 }
 

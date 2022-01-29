@@ -1,39 +1,48 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Update extends CI_Controller {
+class Update extends CI_Controller
+{
+
 
   public function __construct()
   {
     parent::__construct();
-    $this->load->model('updatemodel');
+    $this->load->model('update_model');
   }
+
 
 public function index()
 {
   
-  if ($this->session->userdata('username')) 
+  if ($this->session->userdata('user_name')) 
   {
     
-    $id= $this->input->post('updatename');
+    $id= $this->input->post('update_id');
+
     if(isset($id))
     {
-      $display['data'] = $this->updatemodel->updatedb($id);
+      $display['data'] = $this->update_model->get_task($id);
+
       if ($display)
       {
-        $this->load->view('updateview',$display);        
+        $this->load->view('update_view',$display);        
       }
+
       else
       {
-        redirect('viewtask');
+        redirect('view_task');
       }  
+
     }
+
     else
     {
-      redirect('viewtask');
+      redirect('view_task');
     }
 
   }
+
   else 
   {
     redirect('login','refresh');
@@ -41,21 +50,22 @@ public function index()
 
 }
 
-public function updatetask()
+public function edit_task()
 {
 
   $task = $this->input->post('task');
   $id = $this->input->post('id');
-  $response = $this->updatemodel->edit($id,$task);
+  $response = $this->update_model->update_task($id,$task);
 
   if($response)
   {
-    redirect('viewtask');
+    redirect('view_task');
   }
+  
   else
   {
     $data['message'] = "Unable to update the Task";
-    redirect('viewtask',$data);
+    redirect('view_task',$data);
   }
 
 }

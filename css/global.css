@@ -121,13 +121,9 @@ body {
 	box-shadow: 0px 0px 10px;
 }
 
-.form-controladd {
+.textarea {
 	background-color: transparent;
 	border-radius: 5px;
-	width: 300px;
-	height: 100px;
-	/* border: 10px black;
-    border-width: 10px ; */
 	border-color: #090e06;
 }
 
