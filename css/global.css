@@ -1,10 +1,15 @@
-@media (min-width: 700px) {}
+/* @media only screen and (max-width: 600px) {
+	body {
+		background-color: lightblue;
+	}
+} */
 
 body {
-	background: url(../images/final.jpeg);
-	background-repeat: no-repeat;
-	background-size: cover;
-	/* background-size: 100%; */
+	  font-family: 'Work Sans',
+	  sans-serif;
+	  font-size: 14px;
+	  font-weight: 300;
+   background: #C4FCEF;
 }
 
 .pill1 {
@@ -26,26 +31,56 @@ body {
 }
 
 .form-container {
-	position: fixed;
+		/* position: absolute; */
+		/* margin-right: 20px; */
+		/* margin: auto; */
+		width: 20pc;
+		/* padding-left: 30pc;
+		padding-right: 10pc; */
+		/* padding-top: 7pc; */
+	/* position: fixed;
 	top: 18vh;
 	left: 38%;
 	background-color: transparent !important;
 	padding: 20px 80px 30px 80px;
 	border-radius: 48px;
-	box-shadow: 0px 0px 10px;
+	box-shadow: 0px 0px 10px; */
 }
-
+.centering{
+	padding-top: 140px;
+}
 .sign {
 	justify-content: center;
 }
 
+/* .form-row {
+	width: auto;
+} */
 .form-container1 {
-	position: fixed;
-	top: 13vh;
-	background-color: transparent !important;
-	padding: 70px;
-	border-radius: 50px;
+	/* position: absolute; */
+	/* margin-right: 20px; */
+	/* margin: auto; */
+	/* padding-left: 60px;
+	padding-right: 60px; */
+	padding-top: 7pc;
+	/* width: 70pc;
+	height: 35pc;
+	top: 27px;
 	box-shadow: 0px 0px 10px;
+	border-radius: 10px; */
+}
+
+.create{
+	width: 300px;
+	background-color: #0090C1;
+	color: aliceblue;
+}
+
+.login_btn
+{
+	width: 250px;
+	background-color: #0090C1;
+	color: aliceblue;
 }
 
 .text-correct {
@@ -64,6 +99,7 @@ body {
 .form-control {
 	background-color: transparent;
 	border-radius: 100px;
+	height: 45px;
 	/* border: 10px black;
     border-width: 10px ; */
 	border-color: #111111;
@@ -86,7 +122,19 @@ body {
 }
 
 .button1 {
-	background-color: #90EE90;
+	background-color: #f1ee2e;
+	border: none;
+	border-radius: 80px;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+}
+
+.button2 {
+	background-color: #40eb5c;
 	border: none;
 	border-radius: 80px;
 	color: white;

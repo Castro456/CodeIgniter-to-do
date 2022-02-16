@@ -41,10 +41,11 @@ class Register extends CI_Controller {
   public function validate()
   {
 
-      $this->form_validation->set_rules("firstname","Name","required|alpha");
+      $this->form_validation->set_rules("firstname","Name","required|trim|callback_alpha_dash_space");
       $this->form_validation->set_rules("email","Email","required|valid_email");
       $this->form_validation->set_rules("usr","UserName","required|alpha_numeric");
-      $this->form_validation->set_rules("psr","Password","required|alpha_numeric|min_length[6]");
+      $this->form_validation->set_rules("psr","Password","required|min_length[6]");
+      $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[psr]');
       $this->form_validation->set_rules("dob","DOB","required");
       $this->form_validation->set_rules("age","Age","required|greater_than_equal_to[1]");
 
@@ -66,6 +67,27 @@ class Register extends CI_Controller {
       }
 
     }
+
+
+
+    public function alpha_dash_space($fullname)
+    {
+        if (empty($fullname))
+        {
+          $this->form_validation->set_message('alpha_dash_space', 'The %s field is required');
+          return FALSE;
+        }
+        else if (! preg_match('/^[a-zA-Z\s]+$/', $fullname)) 
+        {
+          $this->form_validation->set_message('alpha_dash_space', 'The %s field may only contain alpha characters & White spaces');
+          return FALSE;
+        } 
+        else 
+        {
+          return TRUE;
+        }
+    }
+
 
 
     public function email_verification()
