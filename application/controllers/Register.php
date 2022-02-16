@@ -20,10 +20,17 @@ class Register extends CI_Controller {
   }
 
 
-  public function index($message = null)
+  public function index($success = null)
   {
 
-   $data['message'] = $message;
+   $data['success'] = $success;
+  //  $data['error'] = $this->uri->segment(3);
+  //  $data['message'] = $message;
+
+    // $data = array(
+    //   // "message" => $message,
+    //   "error" => $error
+    // );
 
    if($this->session->userdata('user_name'))
    {
@@ -48,7 +55,7 @@ class Register extends CI_Controller {
       $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[psr]');
       $this->form_validation->set_rules("dob","DOB","required");
       $this->form_validation->set_rules("age","Age","required|greater_than_equal_to[1]");
-
+      
       if ($this->form_validation->run() === FALSE)
       {
         $this->index();
@@ -98,8 +105,8 @@ class Register extends CI_Controller {
 
       if($check)
       {
-        $message = "Entered Email already exists";
-        $this->index($message);
+        $data['error'] = "Entered Email already exists";
+        $this->load->view("register_view", $data);
       }
 
       else 
@@ -117,7 +124,9 @@ class Register extends CI_Controller {
 
       if($create)
       {
-        redirect('login', 'refresh');
+        $success = "Registration successful can login now";
+        $this->index($success);
+        // $this->load->view("register_view", $data);
       }
 
       else 

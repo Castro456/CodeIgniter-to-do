@@ -21,40 +21,36 @@
 
 </head>
 
-<?php 
- if (!empty($msg)) { ?>
-    <div class="alert alert-danger pill1">
-    <i class="bi bi-x-circle"></i> <?php echo $msg;
- }
-?>
-
 <body>
 
 <div class="container ">
-<div class="d-flex justify-content-center centering">
-<!-- <div class="col-md-4 centering"> -->
+<div class="d-flex justify-content-center login_top">
 
 <form class="form-container needs-validation"  action="login/authentication" method="post">
-<!-- form-container -->
 <div class="mx-auto mb-4" style="width: 120px;">         
   <h1 class="text-dark">Login</h1>
 </div>
 
 <div class="form-group">
   <label class="text-dark">Email</label>
-  <!-- <i class="bi bi-person-circle"></i>  -->
   <input type="text" class="form-control" name="em"  id="email" placeholder="Your Email" value="<?= set_value('em')?>" >
-<!-- </input> -->
  <?php echo form_error("em","<p class='text-danger'>","</p>") ?>
 <?="<br>" ?>
 </div>
 
 <div class="form-group">
-  <!-- <i class="bi bi-lock-fill"></i> -->
 <label class="text-dark">Password</label>
 <input type="password" class="form-control mb-4"  name="psr" id="pass" placeholder="Your Password">
   <?php echo form_error("psr","<p class='text-danger'>","</p>") ?>
 </div> 
+
+<?php 
+ if (!empty($msg)) { ?>
+    <div class="alert alert-danger login_msg">
+    <i class="bi bi-x-circle"></i> <?php echo $msg;
+ }
+?>
+</div>
 
 <div class="mx-auto mb-4" style="width: 250px;">
 <button  type="submit" class="btn login_btn rounded-pill" id="log" >
@@ -62,7 +58,7 @@
 </button>
 </div>
 
-<p class="mx-auto mb-2" class="text-grey" style="width: 200px;">
+<p class="mx-auto mb-2 form-group" class="text-grey" style="width: 200px;">
 First time here ? -
 <a style="text-decoration:none" href="register">
 <font s color="#00A89B";>Sign-up</font>
@@ -71,7 +67,6 @@ First time here ? -
 
 </div>
 </div>
-<!-- </div> -->
 </form>
 
 </body>

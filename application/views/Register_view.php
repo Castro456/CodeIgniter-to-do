@@ -20,20 +20,11 @@
     <title>To-Do List</title>
 </head>
 
- <?php
- if (!empty($message)) { ?>
-     <div class="alert alert-danger pill2"> 
-    <i class="bi bi-x-circle"></i> <?php echo $message; 
- }
-?>
-
 <body>
 
 <div class="container ">
 <div class="d-flex justify-content-center"> 
-<!-- row -->
 <form  class="form-container1" action="register/validate" method="post">
-<!-- form-container1 -->
 <div class="mx-auto mb-4" ">
 <h1 class="text-dark">Sign-up</h1>
 </div> 
@@ -62,32 +53,44 @@
 
 <div class="col-md-5 mb-3">
 <label class="text-dark">Password</label>
-<input type="password" class="form-control" name="psr" placeholder="Minimum of 6 characters" value="<?= set_value('psr')?>"></input>
+<input type="password" class="form-control" name="psr" placeholder="Minimum of 6 characters"></input>
 <?php echo form_error("psr","<p class='text-danger'>","</p>") ?>
 </div>
-<!-- </div> -->
 
-<!-- <div class="form-row"> -->
 <div class="col-md-5 mb-3">
 <label class="text-dark">Confirm Password</label>
-<input type="password" class="form-control" name="confirm_password" placeholder="Re-enter the Password" value="<?= set_value('confirm_password')?>"></input>
+<input type="password" class="form-control" name="confirm_password" placeholder="Re-enter the Password"></input>
 <?php echo form_error("confirm_password","<p class='text-danger'>","</p>") ?>
 </div>
 
 <div class="col-md-3 mb-4">
 <label class="text-dark">DateofBirth</label>
-<input type="date" class="form-control" id="dob" name="dob"  placeholder="Provide your DOB" value="<?= set_value('dob')?>"></input>
+<input type="date" class="form-control" id="dob" name="dob"  placeholder="Provide your DOB"></input>
 <?php echo form_error("dob","<p class='text-danger'>","</p>") ?>
 </div>
 
 <div class="col-md-3 mb-4">
 <label class="text-dark">Age</label>
-<input type="text" class="form-control" style="background : transparent;" id="calage" name="age" readonly placeholder="Atleast 1"  value="<?= set_value('age')?>"></input>
+<input type="text" class="form-control" style="background : transparent;" id="calage" name="age" readonly placeholder="Atleast 1" ></input>
 <?php echo form_error("age","<p class='text-danger'>","</p>") ?>
 </div>
 </div>
 
+<?php
+if(!empty($error)) 
+{?>
+<div class="alert alert-danger register_msg"> 
+<i class="bi bi-x-circle"></i> <?php echo $error; 
+}
+?></div>
 
+<?php
+if(!empty($success)) 
+{?>
+<div class="alert alert-success register_success_msg"> 
+<i class="bi bi-check-circle"></i> <?php echo $success; 
+}
+?></div>
 
 <div class="mx-auto mb-4" style="width: 480px;">
 <button  class="btn rounded-pill create" name="create">Create</button>
