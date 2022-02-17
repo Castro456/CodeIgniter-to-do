@@ -11,10 +11,111 @@ class Admin_api extends REST_Controller
   {
     parent::__construct();
     $this->load->model("api/admin_model");
+    $this->load->model("login_model");
     $this->load->config('secret_key'); // Loading secret key from config folder, file name of 'secret_key.php'
     $this->token = $this->input->request_headers(); // Getting JWT Token from header
   }
   
+
+  public function generate_api_post()
+  {
+
+    $validated = false;
+
+    if($this->session->userdata('user_validated') == true)
+    {
+      $validated = true;
+    }
+    else
+    {
+      $email = $this->post('email');
+      $password = $this->post('password');
+
+      if(empty($email) || empty($password))
+      {
+        $this->response(array(
+          "status" => 0,
+          "message" => "Username or Password is incorrect"
+        ),200);
+      }
+      else
+      {
+        $data = $this->login_model->check_email($email);
+
+        if ($data == false) 
+        {
+          $this->response(array(
+            "status" => 0,
+            "message" => "Username or Password is 1incorrect"
+          ),200);
+        }
+  
+        else 
+        {
+          $password = $password;
+          $memcached_password_key = 'user'.$email."password";
+  
+          //Memcached Part
+          $user_password = $this->memcached_library->get($memcached_password_key);
+  
+          if (empty($user_password)) 
+          {
+            $user_password = $this->login_model->get_user_password($email);
+            $this->memcached_library->add($memcached_password_key,$user_password);
+          }
+  
+          $check_password = $this->login_model->check_password($user_password,$password);
+  
+          if ($check_password == true) 
+          {
+            $user_details_key = 'user'.$email."details";
+            $user_details = $this->memcached_library->get($user_details_key);
+  
+            if (empty($user_details)) 
+            {
+              $user_details = $this->login_model->get_user_details($email);
+              $this->memcached_library->add($user_details_key,$user_details);
+            }
+
+              $secret_key = $this->config->item('todo_secret_key');
+              $api_data = array(
+                'user_id' => $user_details['id'],
+                'user_name' => $user_details['username']
+              );
+              $encoded = JWT::encode($api_data,$secret_key);
+              $this->response(array(
+                "status" => 0,
+                "jwt"    => $encoded
+              ),200);
+          }
+          else
+          {
+            $this->response(array(
+              "status" => 0,
+              "message" => "Username or Password is 2incorrect"
+            ));
+          }
+       }
+      }
+    }
+    if($validated == true)
+    {
+      $user_id = $this->session->userdata('user_id');
+      $user_name = $this->session->userdata('user_name');
+      $secret_key = $this->config->item('todo_secret_key');
+      $api_data = array(
+        'user_id' => $user_id,
+        'user_name' => $user_name
+      );
+      $encoded = JWT::encode($api_data,$secret_key);
+      $this->response($encoded,200);
+    }
+
+  }
+
+
+
+
   
   public function all_users_get()
   {
@@ -77,7 +178,7 @@ class Admin_api extends REST_Controller
 
   public function delete_user_delete()
   {
-    
+
   }
 
 

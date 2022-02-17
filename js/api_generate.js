@@ -4,7 +4,7 @@ $(document).ready(function(){
   {
     // e.preventDefault();
     $.ajax({
-    url : "admin/generate-api",
+    url : "api/admin/generate-api",
     type : "POST",
     success : function(result){
       var data = result

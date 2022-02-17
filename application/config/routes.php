@@ -12,7 +12,7 @@ $route['api/task/status'] = 'api/Tasks_api/task_status';
 
 
 //========================== JWT Generator =================================
-$route['admin/generate-api'] = 'admin_api/generate_api_key';
+$route['api/admin/generate-api'] = 'api/v1/admin_api/generate_api';
 
 
 //========================== v1 Admin API ========================================
