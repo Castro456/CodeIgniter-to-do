@@ -12,26 +12,49 @@ class Admin_api extends REST_Controller
     parent::__construct();
     $this->load->model("api/admin_model");
     $this->load->config('secret_key'); // Loading secret key from config folder, file name of 'secret_key.php'
-    $all_headers = getallheaders(); // Inbuilt php fn to get all the header while we make a request
-    $token = $all_headers['JWT']; // Passing name of the header should be same 'JWT'
-    $token = trim($token);
-    $this->token = $this->security->xss_clean($token);
+    $this->token = $this->input->request_headers(); // Getting JWT Token from header
   }
   
   
   public function all_users_get()
   {
-    $secret_key = $this->config->item('todo_secret_key'); // From file 'secret_key.php' the key is stored in type array.
-    try
+
+    $validated = false;
+    
+    if($this->session->userdata('user_validated') == true)
     {
-      $encode_token = JWT::decode($this->token,$secret_key); // If this line error occurs, the error will be caught by catch.
+      $validated = true;
+    }
+
+    else if( ! empty($this->token['JWT']) )  // Header name should be 'JWT'
+    {
+      $token = $this->token['JWT']; 
+      $token = trim($token);
+      $token = $this->security->xss_clean($token);
+
+      $secret_key = $this->config->item('todo_secret_key'); // From file 'secret_key.php' the key is stored in type array.
+
+      try
+      {
+        $decode_token = JWT::decode($token,$secret_key);
+        $validated = true;
+      }
+      catch(Exception $e)
+      {
+        $error = $e->getMessage();
+        $this->response(array(
+          "status" => 0,
+          "error" => $error
+        ),500);
+      }
+    }
+    
+    if($validated == true)
+    {
       $users_list = $this->admin_model->get_all_users();
 
       if (count($users_list) > 0) {
-        $this->response(array(
-          "status"=> "1",
-          "message"=> $users_list
-        ),200); #200
+        $this->response($users_list,200);
       }
 
       else 
@@ -41,17 +64,20 @@ class Admin_api extends REST_Controller
           "message"=> "No Users Found"
         ),200); 
       }
-
     }
-    catch(Exception $e)
+
+    else
     {
-      $error = $e->getMessage();
       $this->response(array(
         "status" => 0,
-        "error" => $error
+        "error" => "Please provide a jwt token in the header to make an API request"
       ),500);
     }
+  }
 
+  public function delete_user_delete()
+  {
+    
   }
 
 

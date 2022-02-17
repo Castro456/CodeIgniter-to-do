@@ -13,7 +13,7 @@ class Admin_model extends CI_Model
     $this->db->select('id,firstname,email,username');
     $this->db->from('users_table');
     $data = $this->db->get();
-    return $data->result();
+    return $data->result_array();
   }
 }
 ?>

@@ -52,6 +52,12 @@
 </form>
 </div>
 
+<div class="form-group">
+<form action="api/admin/users" method="get">
+<button class="button2" id="generate-api" type="submit">Check</button>
+</form>
+</div>
+
 </div>
 </div>
 </div>
