@@ -5,26 +5,29 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>To-Do List</title>
-
-    <base href="<?= base_url(); ?>">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/global.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link rel="icon" type="image/png"  href="images/todoapp.png">
+  <base href="<?= base_url(); ?>">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/global.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <link rel="icon" type="image/png"  href="images/todoapp.png">
 </head>
 
 <body>
 
-<nav class="navbar navbar-light bg-light">
-  <div class="container-fluid justify-content-end">
-    <img src="images/man.png" alt="" width="30" height="24" class="d-inline-block align-text-top ">
-    <?php echo "  ".$this->session->userdata('user_name') ?>
-    <a class="navbar-brand" href="#">
-    </a>
-    <a class="navbar-brand" href="#">
-    </a>
-    <a class="btn btn-danger my-2 my-sm-0 rounded-pill" href="<?= base_url('login/unset_session') ?>" role="button"><i class="bi bi-box-arrow-right"></i> Logout</a>
-  </div>
+<nav class="navbar navbar-light">
+  <a class="navbar-brand" href="home">
+    <img src="images/todoapp.png" width="30" height="30" class="d-inline-block align-top" style="text-decoration:none">
+    To-Do List Application
+  </a>
+  
+  <form class="form-inline">
+    <a href="#">
+      <img src="images/avatar.png" width="40" height="40" class="d-inline-block align-top mr-1">
+    </a> 
+      <?php echo $this->session->userdata('user_name')?>    
+    <a class="btn btn-danger my-2 my-sm-0 rounded-pill ml-3" href="login/unset_session" role="button">Logout</a>
+    </a>      
+  </form>
 </nav>
 
 <div class="container ">
@@ -52,15 +55,16 @@
 </form>
 </div>
 
-<div class="form-group">
+<!-- <div class="form-group">
 <form action="api/admin/users" method="get">
 <button class="button2" id="generate-api" type="submit">Check</button>
 </form>
-</div>
+</div> -->
 
 </div>
 </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

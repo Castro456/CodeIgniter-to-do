@@ -46,7 +46,7 @@ class Admin_api extends REST_Controller
         {
           $this->response(array(
             "status" => 0,
-            "message" => "Username or Password is 1incorrect"
+            "message" => "Username or Password is incorrect"
           ),200);
         }
   
@@ -77,22 +77,23 @@ class Admin_api extends REST_Controller
               $this->memcached_library->add($user_details_key,$user_details);
             }
 
-              $secret_key = $this->config->item('todo_secret_key');
-              $api_data = array(
-                'user_id' => $user_details['id'],
-                'user_name' => $user_details['username']
-              );
-              $encoded = JWT::encode($api_data,$secret_key);
-              $this->response(array(
-                "status" => 0,
-                "jwt"    => $encoded
-              ),200);
+            $secret_key = $this->config->item('todo_secret_key');
+            $api_data = array(
+              'user_id' => $user_details['id'],
+              'user_name' => $user_details['username']
+            );
+            $encoded = JWT::encode($api_data,$secret_key);
+            $this->response(array(
+              "status" => 1,
+              "message" => "Login Successful",
+              "jwt"    => $encoded
+            ),200);
           }
           else
           {
             $this->response(array(
               "status" => 0,
-              "message" => "Username or Password is 2incorrect"
+              "message" => "Username or Password is incorrect"
             ));
           }
        }

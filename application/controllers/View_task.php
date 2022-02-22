@@ -3,11 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class View_task extends CI_Controller {
 
-  public function index($message = null)
+  public function index()
   {
-    $data['row'] = null;
-    $data['message'] = $message;
-
     if ($this->session->userdata('user_name')) 
     {
 
@@ -22,8 +19,8 @@ class View_task extends CI_Controller {
 
       else
       {
-        $data['message'] = "Nothing to display add some Task";
-        $this->load->view('task_view',$data);
+        $error['message'] = "Nothing to display add some Task";
+        $this->load->view('task_view',$error);
       }
       
     }

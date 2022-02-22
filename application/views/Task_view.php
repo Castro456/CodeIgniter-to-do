@@ -16,25 +16,30 @@
 
 </head>
 
-<nav class="navbar navbar-light bg-light viewnav" style="background-color: #CAE9F5">
-    <a class="navbar-brand" href="home"><i class="bi bi-arrow-left-circle"></i>  Back</a>
-    <div class="justify-content-end">
-      <img src="images/man.png" alt="" width="30" height="24" class="d-inline-block align-text-end ">
-      <?php echo "  ".$this->session->userdata('user_name') ?>
-      <a class="navbar-brand" href="#"></a>
-      <a class="navbar-brand" href="#"></a>
-      <a class="btn btn-danger my-2 my-sm-0 rounded-pill" href="login/unset_session" role="button"><i class="bi bi-box-arrow-right"></i> Logout</a>
-    </div>
+<nav class="navbar navbar-light">
+  <a class="navbar-brand" href="home">
+    <img src="images/todoapp.png" width="30" height="30" class="d-inline-block align-top" style="text-decoration:none">
+    To-Do List Application
+  </a>
+  
+  <form class="form-inline">
+    <a href="#">
+      <img src="images/avatar.png" width="40" height="40" class="d-inline-block align-top mr-1">
+    </a> 
+      <?php echo $this->session->userdata('user_name')?>    
+    <a class="btn btn-danger my-2 my-sm-0 rounded-pill ml-3" href="login/unset_session" role="button">Logout</a>
+    </a>      
+  </form>
 </nav>
 
 <body>
 
 <table class="table table-bordered">
 
-<thead class="thead-light">
+<thead class="table-top">
 <tr>
 <th colspan="9" ><h1 class="taskcenter">Tasks</h1></th>
-</tr>
+</tr >
 <tr>
   <th class="taskcenter" scope="col">No</th>
   <th class="taskcenter" scope="col">Task</th>
@@ -97,16 +102,18 @@ if (empty($message)) {
 <?php
 $i++;
 }  //end of foreach
-} //end of if
-
-else { ?>
- <div class="alert alert-danger taskcenter" role="alert">
- <?php echo $message;
-}
-?>
+}  //end of if ?>
 
 </tbody>
 </table> 
+<?php
+if(!empty($message)) { ?>
+ <div class="alert nothing-task" role="alert">
+  <i class="bi bi-exclamation-lg"></i>
+ <?php echo $message;
+}
+?>
+</div>
 
 <!-- Modal -->
 <div class="modal fade " id="mymodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

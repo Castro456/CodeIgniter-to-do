@@ -7,6 +7,21 @@ body {
    background: #C4FCEF;
 }
 
+.navbar{
+  border-bottom-style: solid;
+	border-width: 1px;
+	border-color: black;
+}
+
+.avatar{
+	padding: 4px;
+	background: #fff;
+	border-radius: 50%;
+	-webkit-box-shadow: 0 2px 3px rgba(10, 10, 10, .1),
+	0 0 0 1px rgba(10, 10, 10, .1);
+	box-shadow: 0 2px 3px rgba(10, 10, 10, .1),
+	0 0 0 1px rgba(10, 10, 10, .1)
+}
 .login_msg {
 	text-align: center;
 	/* border-radius: 48px; */
@@ -215,5 +230,15 @@ body {
 	top: 25vh;
 	left: 20vh;
 	width: 90%;
+}
+
+.nothing-task{
+	text-align: center;
+	background-color: #F1ED5C;
+	margin: 40px;
+}
+
+.table-top{
+	background-color: #FFFFFF;
 }
 
