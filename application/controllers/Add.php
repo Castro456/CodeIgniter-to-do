@@ -23,7 +23,7 @@ class Add extends CI_Controller {
 
     else 
     {
-      redirect('login','refresh');
+      redirect('login');
     }
 
   }
@@ -46,13 +46,6 @@ class Add extends CI_Controller {
       $add_task   = trim($add_task);
       $add_task   = $this->security->xss_clean($add_task);
 
-      if (!isset($add_task))
-      {
-        $message = "Enter a Task";
-        $this->index($message);
-      }
-      else 
-      {
         $user_id = $this->session->userdata('user_id');
 
         $progress = 1;
@@ -62,8 +55,7 @@ class Add extends CI_Controller {
 
         if ($verify)
         {
-          $message = "Task Added";
-          $this->index($message);
+          redirect('add');
         }
 
         else 
@@ -72,7 +64,7 @@ class Add extends CI_Controller {
           $this->index($message);
         }
 
-      }
+      // }
 
     }
 

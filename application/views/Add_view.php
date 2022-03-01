@@ -12,43 +12,50 @@
     <title>To-Do List</title>
 </head>
 
-<nav class="navbar navbar-light bg-light" style="background-color: #CAE9F5">
-    <a class="navbar-brand" href="home"><i class="bi bi-arrow-left-circle"> 
-    </i>Back</a>
-    <div class="justify-content-end">
-        <img src="images/man.png" alt="" width="30" height="24" class="d-inline-block align-text-end ">
-        <?php echo "  ".$this->session->userdata('user_name') ?>
-        <a class="navbar-brand" href="#"></a>
-        <a class="navbar-brand" href="#"></a>
-        <a class="btn btn-danger my-2 my-sm-0 rounded-pill" href="<?= base_url('login/unset_session') ?>" role="button"><i class="bi bi-box-arrow-right"></i> Logout</a>
-    </div>
+<nav class="navbar navbar-light">
+  <a class="navbar-brand" href="home">
+    <img src="images/back-arrow.png" width="28" height="28" class="d-inline-block align-top" style="text-decoration:none">
+    Back
+  </a>
+  
+  <form class="form-inline">
+    <a href="#">
+      <img src="images/avatar.png" width="40" height="40" class="d-inline-block align-top mr-1">
+    </a> 
+      <?php echo $this->session->userdata('user_name')?>    
+    <a class="btn btn-danger my-2 my-sm-0 rounded-pill ml-3" href="login/unset_session" role="button">
+      <i class="bi bi-door-open"></i>
+      Logout</a>
+    </a>      
+  </form>
 </nav>
-
-<?php 
- if (!empty($message)) { ?>
-    <div class="alert alert-success pill1"> 
-      <i class="bi bi-check-circle"></i> <?php echo $message;
- }
-?>
 
 <body>
 
-<div class="container ">
-<div class="row justify-content-center">
+<div class="container">
+<div class="d-flex justify-content-center">
 <form class="add-container" action="add/user_task" method="post">
 
 <div class="form-group">
-<textarea cols='30' rows='2' class="textarea" name="task" id="text" ></textarea>
+<textarea cols='40' rows='3' class="textarea" name="task" id="text" ></textarea>
 <?php echo form_error("task","<div class='text-danger'>","</div>") ?>
 </div>
 
-<div class="align-self-end ml-auto">
-<button type="submit" class="btn btn-success rounded-pill " id="addbtn" >Add</button>
+<?php 
+ if (!empty($message)) { ?>
+    <div class="alert alert-danger login_msg"> 
+      <i class="bi bi-x-circle"></i> <?php echo $message;
+ }
+?>
+</div>
 
+<div class="mx-auto mb-4" style="width: 100px;">
+<button type="submit" class="btn add-btn" id="addbtn">Add</button>
 </div>
-</div>
-</div>
+
 </form>
+</div>
+</div>
 
 </body>
 </html>
