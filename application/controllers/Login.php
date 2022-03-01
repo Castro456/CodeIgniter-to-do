@@ -8,7 +8,6 @@ class Login extends CI_Controller {
   private $email;
   private $password;
   private $user_id;
-  private $user_email;
   private $user_details;
 
 
@@ -135,7 +134,7 @@ class Login extends CI_Controller {
     $session_data = array(
       'user_id' => $user_data['id'],
       'user_fname' => $user_data['firstname'],
-      "user_email" => $this->user_email,
+      "user_email" => $this->email,
       "user_name" => $user_data['username'],
       "user_dob" => $user_data['dob'],
       "user_age" => $user_data['age'],

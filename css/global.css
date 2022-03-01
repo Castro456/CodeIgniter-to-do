@@ -141,12 +141,7 @@ body {
 }
 
 .add-container {
-	position: fixed;
-	top: 24vh;
-	background-color: transparent !important;
-	padding: 90px;
-	border-radius: 50px;
-	box-shadow: 0px 0px 10px;
+  padding-top: 12pc;
 }
 
 .textarea {
@@ -242,3 +237,12 @@ body {
 	background-color: #FFFFFF;
 }
 
+.add-btn{
+	width: 100px;
+	background-color: #0090C1;
+	color: aliceblue;
+}
+
+.home-height{
+	padding-top: 70px;
+}

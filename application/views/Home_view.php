@@ -21,38 +21,43 @@
   </a>
   
   <form class="form-inline">
-    <a href="#">
+    <a href="profile">
       <img src="images/avatar.png" width="40" height="40" class="d-inline-block align-top mr-1">
     </a> 
       <?php echo $this->session->userdata('user_name')?>    
-    <a class="btn btn-danger my-2 my-sm-0 rounded-pill ml-3" href="login/unset_session" role="button">Logout</a>
+    <a class="btn btn-danger my-2 my-sm-0 rounded-pill ml-3" href="login/unset_session" role="button">
+      <i class="bi bi-door-open"></i>
+      Logout</a>
     </a>      
   </form>
 </nav>
 
-<div class="container ">
-<div class="row justify-content-center">  
-<div class="col-md-9"> 
-<div class="form-group">
-<h1 class="text-correct">To-Do List Application</h1>
-</div>
+<div class="container">
+  
+  <h1 class="mx-auto" style="width: 200px; padding-top:150px;">
+    Welcome
+  </h1>
+  <div class="d-flex justify-content-center home-height">  
 
-<div class="form-group">
+<div class="form-row">
+<div class="mb-2 mr-4">
 <form action="add" method="post">
 <button class="button" name="add" >Add Task</button>
 </form>
 </div>
 
-<div class="form-group">
+<div class="mb-2 mr-4">
 <form action="view_task" method="post">
 <button class="button1" id="view" type="submit">View Task</button>
 </form>
 </div>
 
-<div class="form-group">
+<div class="mb-2 mr-4">
 <form action="admin" method="post">
 <button class="button2" id="generate-api" type="submit">Generate API</button>
 </form>
+</div>
+
 </div>
 
 <!-- <div class="form-group">
@@ -61,7 +66,6 @@
 </form>
 </div> -->
 
-</div>
 </div>
 </div>
 

@@ -8,7 +8,7 @@ $(document).ready(function(){
     type : "POST",
     success : function(result){
       var data = result
-      $("#api_field").html(data);
+      $("#api_field").val(data);
     }
     });
   })
