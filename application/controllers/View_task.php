@@ -5,7 +5,7 @@ class View_task extends CI_Controller {
 
   public function index()
   {
-    if ($this->session->userdata('user_name')) 
+    if ($this->session->userdata('user_validated') == true) 
     {
 
       $user_id = $this->session->userdata('user_id');

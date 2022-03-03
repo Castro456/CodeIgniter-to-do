@@ -65,7 +65,7 @@
 
 <div class="col-md-4 mb-4 ">
 <label class="text-dark">Phone</label>
-<input type="text" class="form-control" name="phone" placeholder="Your Phone number" value="<?= set_value('phone')?>">
+<input type="text" class="form-control" name="phone" placeholder="Your Phone number">
 <?php echo form_error("phone","<p class='text-danger'>","</p>") ?> </input>
 </div>
 

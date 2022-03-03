@@ -16,7 +16,7 @@ class Add extends CI_Controller {
 
     $data['message'] = $message;
 
-    if($this->session->userdata('user_name'))
+    if($this->session->userdata('user_validated') == true)
     {
       $this->load->view('add_view',$data); 
     }

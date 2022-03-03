@@ -59,7 +59,7 @@ class Login_model extends CI_Model{
   public function get_user_details($email)
   {
 
-    $this->db->select('id, firstname, username, dob, age');
+    $this->db->select('id, firstname, lastname, phone, dob, age');
     $this->db->where('email',$email);
     $query = $this->db->get('users_table');
     return $data = $query->row_array();

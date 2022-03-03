@@ -23,16 +23,14 @@ class Login extends CI_Controller {
   public function index($msg = NULL)
   {
 
-   $throw_error['msg'] = $msg;
-
-   if($this->session->userdata('user_name'))
+   if($this->session->userdata('user_validated') == true)
    {
      redirect('home','refresh');
    }
 
    else
    {
-     $this->load->view('login_view',$throw_error);
+     $this->load->view('login_view');
    }
 
   }
@@ -134,8 +132,9 @@ class Login extends CI_Controller {
     $session_data = array(
       'user_id' => $user_data['id'],
       'user_fname' => $user_data['firstname'],
+      "user_lname" => $user_data['lastname'],
       "user_email" => $this->email,
-      "user_name" => $user_data['username'],
+      "user_phone" => $user_data['phone'],
       "user_dob" => $user_data['dob'],
       "user_age" => $user_data['age'],
       "user_validated" => true

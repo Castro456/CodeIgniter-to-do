@@ -26,7 +26,7 @@ class Register extends CI_Controller {
 
    $data['success'] = $success;
 
-   if($this->session->userdata('user_name'))
+   if($this->session->userdata('user_validated') == true)
    {
     redirect('home','refresh');
    }

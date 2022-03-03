@@ -6,20 +6,28 @@ class Done_task extends CI_Controller {
 public function index()
 {
 
-    $done_id =$this->input->post('done_id');    
-    $progress = 2;
-    $this->load->model('done_model'); 
-    $response = $this->done_model->index($done_id,$progress);
-
-    if($response)
+    if($this->session->userdata('user_validated') == true)
     {
-      redirect('view_task');
+      $done_id =$this->input->post('done_id');    
+      $progress = 2;
+      $this->load->model('done_model'); 
+      $response = $this->done_model->index($done_id,$progress);
+
+      if($response)
+      {
+        redirect('view_task');
+      }
+
+      else
+      {
+        $data['message'] = "Unable to Done the Task";
+        redirect('view_task',$data);
+      }
     }
 
-    else
+    else 
     {
-      $data['message'] = "Unable to Done the Task";
-      redirect('view_task',$data);
+      redirect('login');
     }
     
 }

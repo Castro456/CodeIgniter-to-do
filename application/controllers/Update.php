@@ -15,7 +15,7 @@ class Update extends CI_Controller
 public function index()
 {
   
-  if ($this->session->userdata('user_name')) 
+  if ($this->session->userdata('user_validated') == true) 
   {
     
     $id= $this->input->post('update_id');
