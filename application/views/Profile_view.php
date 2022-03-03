@@ -16,15 +16,15 @@
 
 <nav class="navbar navbar-light">
   <a class="navbar-brand" href="home">
-    <img src="images/todoapp.png" width="30" height="30" class="d-inline-block align-top" style="text-decoration:none">
-    To-Do List Application
+    <img src="images/back-arrow.png" width="28" height="28" class="d-inline-block align-top" style="text-decoration:none">
+    Back
   </a>
   
   <form class="form-inline">
     <a href="profile">
       <img src="images/avatar.png" width="40" height="40" class="d-inline-block align-top mr-1">
     </a> 
-      <?php echo $this->session->userdata('user_name')?>    
+      <?php echo $this->session->userdata('user_fname')?>    
     <a class="btn btn-danger my-2 my-sm-0 rounded-pill ml-3" href="login/unset_session" role="button">
       <i class="bi bi-door-open"></i>
       Logout</a>
@@ -37,7 +37,7 @@
         <div class="col-md-4 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                 <img class="rounded-circle mt-5 mb-2" src="images/avatar.png" width="170" height="170">
-                <span class="font-weight-bold"><?php echo $this->session->userdata('user_name')?></span>
+                <span class="font-weight-bold"><?php echo $this->session->userdata('user_fname')?></span>
                 <span class="text-black-50"><?php echo $this->session->userdata('user_email')?></span>
             </div>
         </div>

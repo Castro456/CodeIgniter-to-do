@@ -16,16 +16,22 @@
 
 </head>
 
- <nav class="navbar navbar-light bg-light viewnav" style="background-color: #CAE9F5">
-    <a class="navbar-brand" href="view_task"><i class="bi bi-arrow-left-circle">
-    </i>Back</a>
-    <div class="justify-content-end">
-      <img src="images/man.png" alt="" width="30" height="24" class="d-inline-block align-text-end ">
-      <?php echo "  ".$this->session->userdata('user_name') ?>
-      <a class="navbar-brand" href="#"></a>
-      <a class="navbar-brand" href="#"></a>
-      <a class="btn btn-danger my-2 my-sm-0 rounded-pill" href="login/unset_session" role="button"><i class="bi bi-box-arrow-right"></i> Logout</a>
-    </div>
+<nav class="navbar navbar-light">
+  <a class="navbar-brand" href="view_task">
+    <img src="images/back-arrow.png" width="28" height="28" class="d-inline-block align-top" style="text-decoration:none">
+    Back
+  </a>
+  
+  <form class="form-inline">
+    <!-- <a href="profile">
+      <img src="images/avatar.png" width="40" height="40" class="d-inline-block align-top mr-1">
+    </a> 
+      <?php //echo $this->session->userdata('user_fname')?>     -->
+    <a class="btn btn-danger my-2 my-sm-0 rounded-pill ml-3" href="login/unset_session" role="button">
+      <i class="bi bi-door-open"></i>
+      Logout</a>
+    </a>      
+  </form>
 </nav>
 
 <body>

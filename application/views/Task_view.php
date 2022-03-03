@@ -23,10 +23,10 @@
   </a>
   
   <form class="form-inline">
-    <a href="#">
+    <a href="profile">
       <img src="images/avatar.png" width="40" height="40" class="d-inline-block align-top mr-1">
     </a> 
-      <?php echo $this->session->userdata('user_name')?>    
+      <?php echo $this->session->userdata('user_fname')?>    
     <a class="btn btn-danger my-2 my-sm-0 rounded-pill ml-3" href="login/unset_session" role="button">
       <i class="bi bi-door-open"></i>
       Logout</a>
@@ -72,7 +72,7 @@ if (empty($message)) {
   <td class="table-light taskcenter" data-target="task"><?php echo $rows->task ?></td>
   <td class="table-light taskcenter" data-target="date"><?php echo date("d/m/Y", strtotime($rows->time_kept)) ?></td>
   <td class="table-light taskcenter" data-target="time"><?php echo date("H:i", strtotime($rows->time_kept)) ?></td>
-  <td class="table-light taskcenter"  data-target="username"><?php echo $rows->username ?></td>
+  <td class="table-light taskcenter"  data-target="username"><?php echo $rows->firstname ." ". $rows->lastname ?></td>
   <td class="table-light taskcenter"  data-target="progress"><?php echo $rows->progress?></td>  
 
    <!-- Update Task -->
