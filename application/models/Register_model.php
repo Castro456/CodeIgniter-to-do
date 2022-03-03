@@ -25,14 +25,15 @@ class Register_model extends CI_Model{
   }
 
 
-  public function add_user($name,$email,$username,$password,$dob,$age)
+  public function add_user($first_name,$last_name,$email,$password,$phone,$dob,$age)
   {
 
     $data = array(
-      'firstname' => $name,
+      'firstname' => $first_name,
+      'lastname' => $last_name,
       'email' => $email,
-      'username' => $username,
       'pass_word' => $password,
+      'phone' => $phone,
       'dob' => $dob,
       'age' => $age
     );

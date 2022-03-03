@@ -22,7 +22,7 @@
 
 <body>
 
-<div class="container ">
+<div class="container">
 <div class="d-flex justify-content-center"> 
 <form  class="form-container1" action="register/validate" method="post">
 <div class="mx-auto mb-4" ">
@@ -32,35 +32,41 @@
 
 <div class="form-row">
 <div class="col-md-5 mb-4 ">
-<label class="text-dark">Name</label>
-<input type="text" class="form-control" name="firstname" placeholder="Your Name" value="<?= set_value('firstname')?>"> </input>
-<?php echo form_error("firstname","<p class='text-danger'>","</p>") ?>
+<label class="text-dark">First Name</label>
+<input type="text" class="form-control" name="first-name" placeholder="Your First name" value="<?= set_value('first-name')?>"> </input>
+<?php echo form_error("first-name","<p class='text-danger'>","</p>") ?>
 </div>
 
 <div class="col-md-5 mb-4 ">
-<label class="text-dark">Email</label>
-<input type="text" class="form-control" name="email" placeholder="Your Email" value="<?= set_value('email')?>">
-<?php echo form_error("email","<p class='text-danger'>","</p>") ?> </input>
+<label class="text-dark">Last Name</label>
+<input type="text" class="form-control" name="last-name" placeholder="Your Last name" value="<?= set_value('last-name')?>"></input>
+<?php echo form_error("last-name","<p class='text-danger'>","</p>") ?>
 </div>
 </div>
 
 <div class="form-row">
-<div class="col-md-5 mb-4 ">
-<label class="text-dark">Username</label>
-<input type="text" class="form-control" name="usr" placeholder="Name that you would like to Call" value="<?= set_value('usr')?>"></input>
-<?php echo form_error("usr","<p class='text-danger'>","</p>") ?>
+<div class="col-md-4 mb-4 ">
+<label class="text-dark">Email</label>
+<input type="text" class="form-control" name="email" placeholder="Your Email" value="<?= set_value('email')?>">
+<?php echo form_error("email","<p class='text-danger'>","</p>") ?> </input>
 </div>
 
-<div class="col-md-5 mb-3">
-<label class="text-dark">Password</label>
-<input type="password" class="form-control" name="psr" placeholder="Minimum of 6 characters"></input>
-<?php echo form_error("psr","<p class='text-danger'>","</p>") ?>
+<div class="col-md-4 mb-3">
+    <label class="text-dark">Password</label>
+    <input type="password" class="form-control" name="psr" placeholder="Minimum of 6 characters"></input>
+    <?php echo form_error("psr","<p class='text-danger'>","</p>") ?>
 </div>
 
-<div class="col-md-5 mb-3">
-<label class="text-dark">Confirm Password</label>
-<input type="password" class="form-control" name="confirm_password" placeholder="Re-enter the Password"></input>
-<?php echo form_error("confirm_password","<p class='text-danger'>","</p>") ?>
+<div class="col-md-4 mb-3">
+    <label class="text-dark">Confirm Password</label>
+    <input type="password" class="form-control" name="confirm_password" placeholder="Re-enter the Password"></input>
+    <?php echo form_error("confirm_password","<p class='text-danger'>","</p>") ?>
+</div>
+
+<div class="col-md-4 mb-4 ">
+<label class="text-dark">Phone</label>
+<input type="text" class="form-control" name="phone" placeholder="Your Phone number" value="<?= set_value('phone')?>">
+<?php echo form_error("phone","<p class='text-danger'>","</p>") ?> </input>
 </div>
 
 <div class="col-md-3 mb-4">
@@ -71,7 +77,7 @@
 
 <div class="col-md-3 mb-4">
 <label class="text-dark">Age</label>
-<input type="text" class="form-control" style="background : transparent;" id="calage" name="age" readonly placeholder="Atleast 1" ></input>
+<input type="text" class="form-control" style="background : transparent;" id="calage" name="age" readonly placeholder="Age must be atleast 1" ></input>
 <?php echo form_error("age","<p class='text-danger'>","</p>") ?>
 </div>
 </div>
