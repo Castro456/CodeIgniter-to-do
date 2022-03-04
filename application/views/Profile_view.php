@@ -54,7 +54,7 @@
                 <div class="row mt-2">
                     <div class="col-md-6">
                         <label for="name">First Name</label>
-                        <input type="text" class="form-control mb-3" value="<?php echo $this->session->userdata('user_fname')?>" disabled>
+                        <input type="text" class="form-control mb-3" value="<?php echo $this->session->userdata('user_fname')?>" style="background : transparent;" disabled>
                     </div>
                     <div class="col-md-6">
                         <label for="username">Last Name</label>
@@ -64,13 +64,21 @@
 
                 <div class="row mt-2">
                     <div class="col-md-6">
-                        <label for="email">Email</label>
-                        <input type="text" class="form-control mb-3" placeholder="Email" value="<?php echo $this->session->userdata('user_email')?>" disabled>
-                    </div>
+                      <label for="phone">Phone</label>
+                      <input type="text" class="form-control mb-3" name="phone" value="<?php echo $this->session->userdata('user_phone')?>" disabled>
+                     </div>
                     <div class="col-md-6">
-                        <label for="phone">Phone</label>
-                        <input type="text" class="form-control mb-3" value="<?php echo $this->session->userdata('user_phone')?>" disabled>
+                        <label for="dob">Date of Birth</label>
+                        <input type="date" class="form-control mb-3" name="dob" placeholder="Email" value="<?php echo $this->session->userdata('user_dob')?>" disabled>
                     </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-md-6">
+                      <label for="age">Age</label>
+                      <input type="text" class="form-control mb-3" name="age" value="<?php echo $this->session->userdata('user_age')?>" disabled>
+                     </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -84,6 +92,7 @@
     <div class="modal-content">
     <form action="api/admin/update-user" method="post">
       <input type="hidden" name="user-id" id="user-id" value="<?php echo $this->session->userdata('user_id')?>">
+      <input type="hidden" name="email" id="email" value="<?php echo $this->session->userdata('user_email')?>">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -104,13 +113,20 @@
 
                 <div class="row mt-2">
                     <div class="col-md-6">
-                        <label for="email">Email</label>
-                        <input type="text" class="form-control mb-3" name="email" placeholder="Email" value="<?php echo $this->session->userdata('user_email')?>">
-                    </div>
+                      <label for="phone">Phone</label>
+                      <input type="text" class="form-control mb-3" name="phone" value="<?php echo $this->session->userdata('user_phone')?>">
+                     </div>
                     <div class="col-md-6">
-                        <label for="phone">Phone</label>
-                        <input type="text" class="form-control mb-3" name="phone" value="<?php echo $this->session->userdata('user_phone')?>">
+                        <label for="dob">Date of Birth</label>
+                        <input type="date" class="form-control mb-3" id="dob" name="dob" placeholder="Email" value="<?php echo $this->session->userdata('user_dob')?>">
                     </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-md-6">
+                      <label for="age">Age</label>
+                      <input type="text" class="form-control mb-3 disable-fiels" name="age" id="calage" value="<?php echo $this->session->userdata('user_age')?>" readonly>
+                     </div>
                 </div>
             </div>
       <div class="modal-footer">
@@ -127,5 +143,12 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+<script>
+$(".modal").on("hidden.bs.modal", function(){
+     $(this).find('form').trigger('reset');
+});
+</script>
+<script src="<?php echo base_url('./js/agecal.js'); ?>">
+</script>
 </body>
 </html>

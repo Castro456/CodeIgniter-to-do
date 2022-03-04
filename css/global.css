@@ -251,3 +251,11 @@ body {
 .profile1{
 	margin-top: 80px;
 }
+
+input[type="text"]:disabled,
+input[type="date"]:disabled
+{
+
+	background-color: transparent;
+
+}

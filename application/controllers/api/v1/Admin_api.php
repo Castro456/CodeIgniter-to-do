@@ -1,11 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 require(APPPATH.'/libraries/REST_Controller.php');
 
+/**
+ * 
+ * This Class contains methods related to Admin/User. 
+ * @author Castro456 <castrosid456@gmail.com>
+ * 
+ */
 class Admin_api extends REST_Controller
 {
-
 
   public function __construct()
   {
@@ -16,7 +20,14 @@ class Admin_api extends REST_Controller
     $this->token = $this->input->request_headers(); // Getting JWT Token from header
   }
   
+  
 
+  /**
+   * 
+   * POST Method
+   * Login as user using email and password to generate API Token
+   * 
+   */
   public function generate_api_post()
   {
 
@@ -29,7 +40,12 @@ class Admin_api extends REST_Controller
     else
     {
       $email = $this->post('email');
+      $email = trim($email);
+      $email = $this->security->xss_clean($email);
+
       $password = $this->post('password');
+      $password = trim($password);
+      $password = $this->security->xss_clean($password);
 
       if(empty($email) || empty($password))
       {
@@ -99,10 +115,15 @@ class Admin_api extends REST_Controller
        }
       }
     }
+    /**
+     * 
+     * If user logged in from the application, the session data is used in here to create API Token
+     * 
+     */
     if($validated == true)
     {
       $user_id = $this->session->userdata('user_id');
-      $user_name = $this->session->userdata('user_name');
+      $user_name = $this->session->userdata('user_fname');
       $secret_key = $this->config->item('todo_secret_key');
       $api_data = array(
         'user_id' => $user_id,
@@ -115,7 +136,14 @@ class Admin_api extends REST_Controller
   }
 
 
-  
+
+  /**
+  * 
+  * GET Method
+  * JWT Token is needed to make this request
+  * To get the all users for the database
+  * 
+  */
   public function all_users_get()
   {
 
@@ -175,6 +203,15 @@ class Admin_api extends REST_Controller
     }
   }
 
+
+  /**
+   * 
+   * POST Method
+   * Update user details
+   * To update the user details fo FirstName, LastName, Phone, Date-fo-Birth, Age
+   * user-id and email fields are must to pass on post method
+   * 
+   */
   public function update_user_post()
   {
 
@@ -198,6 +235,14 @@ class Admin_api extends REST_Controller
     $phone = trim($phone);
     $phone = $this->security->xss_clean($phone);
 
+    $dob = $this->post('dob');
+    $dob = trim($dob);
+    $dob = $this->security->xss_clean($dob);
+
+    $age = $this->post('age');
+    $age = trim($age);
+    $age = $this->security->xss_clean($age);
+
     $user_details = $this->admin_model->get_user_details($user_id,$email);
 
     if(empty($user_details) )
@@ -210,17 +255,11 @@ class Admin_api extends REST_Controller
     
     else
     {
-
-      if(!empty($first_name) && $first_name != $user_details['firstname'])
-      {
-        $update_user = $this->admin_model->set_first_name($first_name,$email,$user_id);
-      }
-
-      if(!empty($last_name) && $last_name != $user_details['lastname'])
-      {
-        $update_user = $this->admin_model->set_last_name($last_name,$email,$user_id);
-      }
-
+      /**
+       * 
+       * If empty phone/first_name/last_name/dob/age is given. The API will not replace those fields as empty fields it just keeps its old data. To provide this feature the if condition is double checked with both for empty data and same data is being entered or not.
+       * 
+       */
       if(!empty($phone) && $phone != $user_details['phone'])
       {
           $check_phone = $this->admin_model->check_existing_phone($phone);
@@ -239,8 +278,37 @@ class Admin_api extends REST_Controller
           }
       }
 
+      if(!empty($first_name) && $first_name != $user_details['firstname'])
+      {
+        $update_user = $this->admin_model->set_first_name($first_name,$email,$user_id);
+      }
+
+      if(!empty($last_name) && $last_name != $user_details['lastname'])
+      {
+        $update_user = $this->admin_model->set_last_name($last_name,$email,$user_id);
+      }
+
+      if(!empty($dob) && $dob != $user_details['dob'])
+      {
+        $update_user = $this->admin_model->set_dob($dob,$email,$user_id);
+      }
+
+      if(!empty($age) && $age != $user_details['age'])
+      {
+        $update_user = $this->admin_model->set_age($age,$email,$user_id);
+      }
+
       if($update_user == true)
       {
+        /**
+         *
+         * Memcached Delete
+         * Reason for deleting : If it is not deleted, the application session takes data from this memcached key which will be a old key of before updating the user data. 
+         * 
+         *  */ 
+        $user_details_key = 'user'.$email.'details';
+        $user_details = $this->memcached_library->delete($user_details_key);
+
         $this->response(array(
           "status" => 1,
           "message" => "User details updated"
