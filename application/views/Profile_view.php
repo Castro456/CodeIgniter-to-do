@@ -8,6 +8,7 @@
     <base href="<?= base_url(); ?>">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/global.css">
+    <link href="css/toastr.scss" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="icon" type="image/png"  href="images/todoapp.png">
 </head>
@@ -54,7 +55,7 @@
                 <div class="row mt-2">
                     <div class="col-md-6">
                         <label for="name">First Name</label>
-                        <input type="text" class="form-control mb-3" value="<?php echo $this->session->userdata('user_fname')?>" style="background : transparent;" disabled>
+                        <input type="text" class="form-control mb-3" value="<?php echo $this->session->userdata('user_fname')?>" disabled>
                     </div>
                     <div class="col-md-6">
                         <label for="username">Last Name</label>
@@ -91,7 +92,7 @@
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
     <form action="api/admin/update-user" method="post">
-      <input type="hidden" name="user-id" id="user-id" value="<?php echo $this->session->userdata('user_id')?>">
+      <input type="hidden" name="user_id" id="user-id" value="<?php echo $this->session->userdata('user_id')?>">
       <input type="hidden" name="email" id="email" value="<?php echo $this->session->userdata('user_email')?>">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
@@ -103,18 +104,18 @@
             <div class="row mt-2">
                     <div class="col-md-6">
                         <label for="fname">First Name</label>
-                        <input type="text" class="form-control mb-3" name="fname" value="<?php echo $this->session->userdata('user_fname')?>">
+                        <input type="text" class="form-control mb-3" name="fname" id="fname" value="<?php echo $this->session->userdata('user_fname')?>">
                     </div>
                     <div class="col-md-6">
                         <label for="lname">Last Name</label>
-                        <input type="text" class="form-control mb-3" name="lname" value="<?php echo $this->session->userdata('user_lname')?>">
+                        <input type="text" class="form-control mb-3" name="lname" id="lname" value="<?php echo $this->session->userdata('user_lname')?>">
                     </div>
                 </div>
 
                 <div class="row mt-2">
                     <div class="col-md-6">
                       <label for="phone">Phone</label>
-                      <input type="text" class="form-control mb-3" name="phone" value="<?php echo $this->session->userdata('user_phone')?>">
+                      <input type="text" class="form-control mb-3" name="phone" id="phone" value="<?php echo $this->session->userdata('user_phone')?>">
                      </div>
                     <div class="col-md-6">
                         <label for="dob">Date of Birth</label>
@@ -125,30 +126,30 @@
                 <div class="row mt-2">
                     <div class="col-md-6">
                       <label for="age">Age</label>
-                      <input type="text" class="form-control mb-3 disable-fiels" name="age" id="calage" value="<?php echo $this->session->userdata('user_age')?>" readonly>
+                      <input type="text" class="form-control mb-3" name="age" id="calage" value="<?php echo $this->session->userdata('user_age')?>" readonly>
                      </div>
                 </div>
             </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn login_btn">Save changes</button>
+        <button type="button" class="btn login_btn save-btn">Save changes</button>
       </div>
     </form>
     </div>
   </div>
 </div>
 
-
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
 <script>
 $(".modal").on("hidden.bs.modal", function(){
      $(this).find('form').trigger('reset');
 });
 </script>
-<script src="<?php echo base_url('./js/agecal.js'); ?>">
-</script>
+<script src="./js/jquery.js"></script>
+<script src="./js/agecal.js"></script>
+<script src="./js/profile.js"></script>
+<script src="./js/toastr.js"></script>
 </body>
 </html>

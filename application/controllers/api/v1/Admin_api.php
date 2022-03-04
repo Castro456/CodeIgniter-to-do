@@ -20,7 +20,7 @@ class Admin_api extends REST_Controller
     $this->token = $this->input->request_headers(); // Getting JWT Token from header
   }
   
-  
+
 
   /**
    * 
@@ -215,7 +215,7 @@ class Admin_api extends REST_Controller
   public function update_user_post()
   {
 
-    $user_id = $this->post('user-id');
+    $user_id = $this->post('user_id');
     $user_id = trim($user_id);
     $user_id = $this->security->xss_clean($user_id);
 
@@ -244,6 +244,7 @@ class Admin_api extends REST_Controller
     $age = $this->security->xss_clean($age);
 
     $user_details = $this->admin_model->get_user_details($user_id,$email);
+    $update_user = false;
 
     if(empty($user_details) )
     {
@@ -298,7 +299,7 @@ class Admin_api extends REST_Controller
         $update_user = $this->admin_model->set_age($age,$email,$user_id);
       }
 
-      if($update_user == true)
+      if($update_user === true)
       {
         /**
          *
@@ -324,6 +325,12 @@ class Admin_api extends REST_Controller
       }
     }
     
+  }
+
+
+  public function sample_post()
+  {
+    echo "Working";
   }
 
 
