@@ -115,8 +115,6 @@ class Admin_api extends REST_Controller
   }
 
 
-
-
   
   public function all_users_get()
   {
@@ -177,9 +175,87 @@ class Admin_api extends REST_Controller
     }
   }
 
-  public function delete_user_delete()
+  public function update_user_post()
   {
 
+    $user_id = $this->post('user-id');
+    $user_id = trim($user_id);
+    $user_id = $this->security->xss_clean($user_id);
+
+    $first_name = $this->post('fname');
+    $first_name = trim($first_name);
+    $first_name = $this->security->xss_clean($first_name);
+
+    $last_name = $this->post('lname');
+    $last_name = trim($last_name);
+    $last_name = $this->security->xss_clean($last_name);
+
+    $email = $this->post('email'); 
+    $email = trim($email);
+    $email = $this->security->xss_clean($email);
+
+    $phone = $this->post('phone');
+    $phone = trim($phone);
+    $phone = $this->security->xss_clean($phone);
+
+    $user_details = $this->admin_model->get_user_details($user_id,$email);
+
+    if(empty($user_details) )
+    {
+      $this->response(array(
+        "status" => 0,
+        "message" => "Error Occurred"
+      ),200);
+    }
+    
+    else
+    {
+
+      if(!empty($first_name) && $first_name != $user_details['firstname'])
+      {
+        $update_user = $this->admin_model->set_first_name($first_name,$email,$user_id);
+      }
+
+      if(!empty($last_name) && $last_name != $user_details['lastname'])
+      {
+        $update_user = $this->admin_model->set_last_name($last_name,$email,$user_id);
+      }
+
+      if(!empty($phone) && $phone != $user_details['phone'])
+      {
+          $check_phone = $this->admin_model->check_existing_phone($phone);
+
+          if($check_phone)
+          {
+            $this->response(array(
+              "status" => 0,
+              "message" => "This phone number already exits"
+            ),200);
+          }
+
+          else 
+          {
+            $update_user = $this->admin_model->set_phone_number($phone,$email,$user_id);
+          }
+      }
+
+      if($update_user == true)
+      {
+        $this->response(array(
+          "status" => 1,
+          "message" => "User details updated"
+        ),200);
+      }
+
+      else
+      {
+        $this->response(array(
+          "status" => 0,
+          "message" => "Nothing to change"
+        ),200);
+      }
+    }
+    
   }
 
 

@@ -17,6 +17,7 @@ $route['api/admin/generate-api'] = 'api/v1/admin_api/generate_api';
 
 //========================== v1 Admin API ========================================
 $route['api/admin/users'] = 'api/v1/admin_api/all_users';
+$route['api/admin/update-user'] = 'api/v1/admin_api/update_user';
 
 
 /*Default Controller */

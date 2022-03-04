@@ -1,7 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-
 class Login extends CI_Controller {
 
 
@@ -22,6 +21,7 @@ class Login extends CI_Controller {
 
   public function index($msg = NULL)
   {
+    $throw_error['msg'] = $msg;
 
    if($this->session->userdata('user_validated') == true)
    {
@@ -30,7 +30,7 @@ class Login extends CI_Controller {
 
    else
    {
-     $this->load->view('login_view');
+     $this->load->view('login_view',$throw_error);
    }
 
   }
@@ -79,13 +79,19 @@ class Login extends CI_Controller {
 
   }
 
-
+  public function delete_mem()
+  {
+    $memcached_password_key = 'usercastro@geedesk.compassword';
+    $user_password = $this->memcached_library->delete($memcached_password_key);
+    $user_details_key = 'usercastro@geedesk.comdetails';
+    $user_details = $this->memcached_library->delete($user_details_key);
+  }
 
   public function check_password()
   {
 
     $password = $this->password;
-    $memcached_password_key = 'user'.$this->email."password";
+    $memcached_password_key = 'user'.$this->email.'password';
 
     //Memcached Part
     $user_password = $this->memcached_library->get($memcached_password_key);
@@ -100,7 +106,7 @@ class Login extends CI_Controller {
 
     if ($check_password == true) 
     {
-      $user_details_key = 'user'.$this->email."details";
+      $user_details_key = 'user'.$this->email.'details';
       $user_details = $this->memcached_library->get($user_details_key);
 
       if (empty($user_details)) 
@@ -147,7 +153,7 @@ class Login extends CI_Controller {
   public function unset_session()
   {
 
-    session_destroy();
+    $this->session->sess_destroy();
     redirect('login');
 
   }
