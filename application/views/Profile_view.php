@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <base href="<?= base_url(); ?>">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/global.css">
     <link href="css/toastr.scss" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
@@ -39,7 +40,8 @@
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                 <img class="rounded-circle mt-5 mb-2" src="images/avatar.png" width="170" height="170">
                 <span class="font-weight-bold"><?php echo $this->session->userdata('user_fname')?></span>
-                <span class="text-black-50"><?php echo $this->session->userdata('user_email')?></span>
+                <span class="text-black-50 mb-4"><?php echo $this->session->userdata('user_email')?></span>
+                <button class="btn btn-danger rounded-pill" type="button" data-toggle="modal" data-target="#deleteModal">Delete your Account</button>
             </div>
         </div>
         <div class="col-md-8">
@@ -87,17 +89,15 @@
 </div> 
 
 
-<!-- Modal -->
+<!-- Edit Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
     <form action="api/admin/update-user" method="post">
       <input type="hidden" name="user_id" id="user-id" value="<?php echo $this->session->userdata('user_id')?>">
       <input type="hidden" name="email" id="email" value="<?php echo $this->session->userdata('user_email')?>">
-      <div class="modal-header">
+      <div class="modal-header text-center d-block">
         <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
@@ -138,6 +138,31 @@
     </div>
   </div>
 </div>
+<!-- Edit Modal End -->
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header d-block">
+        <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title text-center" id="exampleModalLabel">Delete</h5>
+      </div>
+      <div class="modal-body text-center">
+        <h2> Are you sure to delete your account ? </h2>
+        <br>
+        <small style="color:red">Note: This will delete all of your data permanently</small>
+      </div>
+      <div class="modal-footer d-block text-center">
+        <button type="button" class="btn btn-danger">Yes</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Edit Modal End -->
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
