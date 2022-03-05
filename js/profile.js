@@ -61,11 +61,13 @@ $(document).ready(function(){
                 }
 
                 else if(message.message == "User details updated"){
+                    $(".save-btn").attr("disabled", true);
+                    $(".save-btn").text("Please Wait...");
                     toastr.success("Changes updated successfully");
                     toastr.info("Logging out to reflect the changes");
                     window.setTimeout(function() {
                         window.location.replace("login/unset_session");
-                    }, 5000);
+                    }, 4000);
                 }
 
                 else{
