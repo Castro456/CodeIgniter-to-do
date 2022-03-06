@@ -16,6 +16,7 @@ class Admin_api extends REST_Controller
     parent::__construct();
     $this->load->model("api/admin_model");
     $this->load->model("login_model");
+    $this->load->model("delete_model");
     $this->load->config('secret_key'); // Loading secret key from config folder, file name of 'secret_key.php'
     $this->token = $this->input->request_headers(); // Getting JWT Token from header
   }
@@ -31,11 +32,15 @@ class Admin_api extends REST_Controller
   public function generate_api_post()
   {
 
-    $validated = false;
-
     if($this->session->userdata('user_validated') == true)
     {
-      $validated = true;
+      $user_id = $this->session->userdata('user_id');
+      $secret_key = $this->config->item('todo_secret_key');
+      $api_data = array(
+        'user_id' => $user_id,
+      );
+      $encoded = JWT::encode($api_data,$secret_key);
+      $this->response($encoded,200);
     }
     else
     {
@@ -51,8 +56,8 @@ class Admin_api extends REST_Controller
       {
         $this->response(array(
           "status" => 0,
-          "message" => "Username or Password is incorrect"
-        ),200);
+          "message" => "Email and Password field is required"
+        ),404);
       }
       else
       {
@@ -62,41 +67,23 @@ class Admin_api extends REST_Controller
         {
           $this->response(array(
             "status" => 0,
-            "message" => "Username or Password is incorrect"
+            "message" => "Email or Password is incorrect"
           ),200);
         }
   
         else 
         {
-          $password = $password;
-          $memcached_password_key = 'user'.$email."password";
-  
-          //Memcached Part
-          $user_password = $this->memcached_library->get($memcached_password_key);
-  
-          if (empty($user_password)) 
-          {
-            $user_password = $this->login_model->get_user_password($email);
-            $this->memcached_library->add($memcached_password_key,$user_password);
-          }
+          $user_password = $this->login_model->get_user_password($email);
   
           $check_password = $this->login_model->check_password($user_password,$password);
   
           if ($check_password == true) 
           {
-            $user_details_key = 'user'.$email."details";
-            $user_details = $this->memcached_library->get($user_details_key);
-  
-            if (empty($user_details)) 
-            {
-              $user_details = $this->login_model->get_user_details($email);
-              $this->memcached_library->add($user_details_key,$user_details);
-            }
+            $user_details = $this->admin_model->get_user_id($email);
 
             $secret_key = $this->config->item('todo_secret_key');
             $api_data = array(
               'user_id' => $user_details['id'],
-              'user_name' => $user_details['username']
             );
             $encoded = JWT::encode($api_data,$secret_key);
             $this->response(array(
@@ -109,28 +96,11 @@ class Admin_api extends REST_Controller
           {
             $this->response(array(
               "status" => 0,
-              "message" => "Username or Password is incorrect"
-            ));
+              "message" => "Email or Password is incorrect"
+            ),404);
           }
        }
       }
-    }
-    /**
-     * 
-     * If user logged in from the application, the session data is used in here to create API Token
-     * 
-     */
-    if($validated == true)
-    {
-      $user_id = $this->session->userdata('user_id');
-      $user_name = $this->session->userdata('user_fname');
-      $secret_key = $this->config->item('todo_secret_key');
-      $api_data = array(
-        'user_id' => $user_id,
-        'user_name' => $user_name
-      );
-      $encoded = JWT::encode($api_data,$secret_key);
-      $this->response($encoded,200);
     }
 
   }
@@ -147,60 +117,25 @@ class Admin_api extends REST_Controller
   public function all_users_get()
   {
 
-    $validated = false;
-    
-    if($this->session->userdata('user_validated') == true)
-    {
-      $validated = true;
-    }
+    $users_list = $this->admin_model->get_all_users();
 
-    else if( ! empty($this->token['JWT']) )  // Header name should be 'JWT'
-    {
-      $token = $this->token['JWT']; 
-      $token = trim($token);
-      $token = $this->security->xss_clean($token);
-
-      $secret_key = $this->config->item('todo_secret_key'); // From file 'secret_key.php' the key is stored in type array.
-
-      try
-      {
-        $decode_token = JWT::decode($token,$secret_key);
-        $validated = true;
-      }
-      catch(Exception $e)
-      {
-        $error = $e->getMessage();
-        $this->response(array(
-          "status" => 0,
-          "error" => $error
-        ),500);
-      }
-    }
-    
-    if($validated == true)
-    {
-      $users_list = $this->admin_model->get_all_users();
-
-      if (count($users_list) > 0) {
-        $this->response($users_list,200);
-      }
-
-      else 
-      {
-        $this->response(array(
-          "status"=> "0",
-          "message"=> "No Users Found"
-        ),200); 
-      }
-    }
-
-    else
+    if (count($users_list) > 0)
     {
       $this->response(array(
-        "status" => 0,
-        "error" => "Please provide a jwt token in the header to make an API request"
-      ),500);
+        "status" => 1,
+        "message" => "List of To-Do List Users",
+        "data" => $users_list
+      ),200);
     }
+
+    else 
+    {
+      $this->response(array(
+        "status"=> "0",
+        "message"=> "No Users Found"
+      ),404); 
+    }
+ 
   }
 
 
@@ -243,94 +178,196 @@ class Admin_api extends REST_Controller
     $age = trim($age);
     $age = $this->security->xss_clean($age);
 
-    $user_details = $this->admin_model->get_user_details($user_id,$email);
-    $update_user = false;
-
-    if(empty($user_details) )
-    {
-      $this->response(array(
-        "status" => 0,
-        "message" => "Error Occurred"
-      ),200);
-    }
+    $validated = false;
     
-    else
+    if($this->session->userdata('user_validated') == true)
     {
-      /**
-       * 
-       * If empty phone/first_name/last_name/dob/age is given. The API will not replace those fields as empty fields it just keeps its old data. To provide this feature the if condition is double checked with both for empty data and same data is being entered or not.
-       * 
-       */
-      if(!empty($phone) && $phone != $user_details['phone'])
+      $validated = true;
+    }
+
+    else if( ! empty($this->token['JWT']) )  // Header name should be 'JWT'
+    {
+      $token = $this->token['JWT']; 
+      $token = trim($token);
+      $token = $this->security->xss_clean($token);
+
+      $secret_key = $this->config->item('todo_secret_key'); // From file 'secret_key.php' the key is stored in type array.
+
+      try
       {
-          $check_phone = $this->admin_model->check_existing_phone($phone);
-
-          if($check_phone)
-          {
-            $this->response(array(
-              "status" => 0,
-              "message" => "This phone number already exits"
-            ),200);
-          }
-
-          else 
-          {
-            $update_user = $this->admin_model->set_phone_number($phone,$email,$user_id);
-          }
+        $decode_token = JWT::decode($token,$secret_key);
+        $validated = true;
       }
-
-      if(!empty($first_name) && $first_name != $user_details['firstname'])
+      catch(Exception $e)
       {
-        $update_user = $this->admin_model->set_first_name($first_name,$email,$user_id);
-      }
-
-      if(!empty($last_name) && $last_name != $user_details['lastname'])
-      {
-        $update_user = $this->admin_model->set_last_name($last_name,$email,$user_id);
-      }
-
-      if(!empty($dob) && $dob != $user_details['dob'])
-      {
-        $update_user = $this->admin_model->set_dob($dob,$email,$user_id);
-      }
-
-      if(!empty($age) && $age != $user_details['age'])
-      {
-        $update_user = $this->admin_model->set_age($age,$email,$user_id);
-      }
-
-      if($update_user === true)
-      {
-        /**
-         *
-         * Memcached Delete
-         * Reason for deleting : If it is not deleted, the application session takes data from this memcached key which will be a old key of before updating the user data. 
-         * 
-         *  */ 
-        $user_details_key = 'user'.$email.'details';
-        $user_details = $this->memcached_library->delete($user_details_key);
-
+        $error = $e->getMessage();
         $this->response(array(
-          "status" => 1,
-          "message" => "User details updated"
-        ),200);
+          "status" => 0,
+          "error" => $error
+        ),500);
       }
+    }
 
-      else
+    if($validated == true)
+    {
+
+      $user_details = $this->admin_model->get_user_details($user_id,$email);
+      $update_user = false;
+  
+      if(empty($user_details) )
       {
         $this->response(array(
           "status" => 0,
-          "message" => "Nothing to change"
+          "message" => "Error Occurred"
         ),200);
       }
+      
+      else
+      {
+        /**
+         * 
+         * If empty phone/first_name/last_name/dob/age is given. The API will not replace those fields as empty fields it just keeps its old data. To provide this feature the if condition is double checked with both for empty data and same data is being entered or not.
+         * 
+         */
+        if(!empty($phone) && $phone != $user_details['phone'])
+        {
+            $check_phone = $this->admin_model->check_existing_phone($phone);
+  
+            if($check_phone)
+            {
+              $this->response(array(
+                "status" => 0,
+                "message" => "This phone number already exits"
+              ),200);
+            }
+  
+            else 
+            {
+              $update_user = $this->admin_model->set_phone_number($phone,$email,$user_id);
+            }
+        }
+  
+        if(!empty($first_name) && $first_name != $user_details['firstname'])
+        {
+          $update_user = $this->admin_model->set_first_name($first_name,$email,$user_id);
+        }
+  
+        if(!empty($last_name) && $last_name != $user_details['lastname'])
+        {
+          $update_user = $this->admin_model->set_last_name($last_name,$email,$user_id);
+        }
+  
+        if(!empty($dob) && $dob != $user_details['dob'])
+        {
+          $update_user = $this->admin_model->set_dob($dob,$email,$user_id);
+        }
+  
+        if(!empty($age) && $age != $user_details['age'])
+        {
+          $update_user = $this->admin_model->set_age($age,$email,$user_id);
+        }
+  
+        if($update_user === true)
+        {
+          /**
+           *
+           * Memcached Delete
+           * Reason for deleting : If it is not deleted, the application session takes data from this memcached key which will be a old key of before updating the user data. 
+           * 
+           *  */ 
+          $user_details_key = 'user'.$email.'details';
+          $user_details = $this->memcached_library->delete($user_details_key);
+  
+          $this->response(array(
+            "status" => 1,
+            "message" => "User details updated"
+          ),200);
+        }
+  
+        else
+        {
+          $this->response(array(
+            "status" => 0,
+            "message" => "Nothing to change"
+          ),200);
+        }
+      }
+    }
+    else
+    {
+      $this->response(array(
+        "status" => 0,
+        "error" => "Please provide a jwt token in the header to make an API request"
+      ),500);
     }
     
   }
 
 
-  public function sample_post()
+  public function delete_user_post()
   {
-    echo "Working";
+
+    $user_id = $this->post('user_id');
+    $user_id = trim($user_id);
+    $user_id = $this->security->xss_clean($user_id);
+
+    $email = $this->post('email');
+    $email = trim($email);
+    $email = $this->security->xss_clean($email);
+
+    $validated = false;
+    
+    if($this->session->userdata('user_validated') == true)
+    {
+      $validated = true;
+    }
+
+    else if( ! empty($this->token['JWT']) )  // Header name should be 'JWT'
+    {
+      $token = $this->token['JWT']; 
+      $token = trim($token);
+      $token = $this->security->xss_clean($token);
+
+      $secret_key = $this->config->item('todo_secret_key'); // From file 'secret_key.php' the key is stored in type array.
+
+      try
+      {
+        $decode_token = JWT::decode($token,$secret_key);
+        $validated = true;
+      }
+      catch(Exception $e)
+      {
+        $error = $e->getMessage();
+        $this->response(array(
+          "status" => 0,
+          "error" => $error
+        ),500);
+      }
+    }
+
+    if($validated == true)
+    {
+      $check_user = $this->admin_model->check_email($user_id,$email);
+  
+      $task_id = $this->admin_model->get_task_id($user_id,$email);
+      // print_r ($task_id);
+      if($task_id > 0)
+      {
+        foreach($task_id as $row)
+        {
+          $delete_user_task = $this->delete_model->index($row['id']);
+          // print_r($row);
+        }
+      }
+      $delete_user = $this->admin_model->delete_user($user_id,$email);
+    }
+    else
+    {
+      $this->response(array(
+        "status" => 0,
+        "error" => "Please provide a jwt token in the header to make an API request"
+      ),500);
+    }
   }
 
 

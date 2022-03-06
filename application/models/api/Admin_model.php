@@ -22,11 +22,30 @@ class Admin_model extends CI_Model
    */
   public function get_all_users()
   {
-    $this->db->select('id,firstname,lastname,email');
+    $this->db->select('id,firstname,lastname');
     $this->db->from('users_table');
     $data = $this->db->get();
     return $data->result_array();
   }
+
+
+
+  /**
+   * 
+   * To get user id for jwt
+   * Parameters : $email
+   * 
+   */
+  public function get_user_id($email)
+  {
+    $this->db->select('id');
+    $this->db->from('users_table');
+    $this->db->where('email',$email);
+    $data = $this->db->get(); 
+    return $data->row_array();
+
+  }
+
 
 
   /**
@@ -171,6 +190,23 @@ class Admin_model extends CI_Model
     $this->db->where('email',$email);
     return $this->db->update('users_table',$data);
   }
+
+
   
+  /**
+   * 
+   * To get task id
+   * Parameter: $user_id
+   * 
+   */
+  public function get_task_id($user_id)
+  {
+    $this->db->select("task_table.id");
+    $this->db->from("task_table");
+    $this->db->where("users_table.id",$user_id);
+    $this->db->join("users_table","task_table.user = users_table.id");
+    $id_data = $this->db->get();
+    return $id_data->result_array();
+  }  
 }
 ?>

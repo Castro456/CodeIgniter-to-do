@@ -93,7 +93,7 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
-    <form action="api/admin/update-user" method="post">
+    <form method="post">
       <input type="hidden" name="user_id" id="user-id" value="<?php echo $this->session->userdata('user_id')?>">
       <input type="hidden" name="email" id="email" value="<?php echo $this->session->userdata('user_email')?>">
       <div class="modal-header text-center d-block">
@@ -144,6 +144,9 @@
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
+      <form method="post">
+        <input type="hidden" name="user_id" id="user_id" value="<?php echo $this->session->userdata('user_id')?>">
+        <input type="hidden" name="email" id="email" value="<?php echo $this->session->userdata('user_email')?>">
       <div class="modal-header d-block">
         <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -158,6 +161,7 @@
       <div class="modal-footer d-block text-center">
         <button type="button" class="btn btn-danger">Yes</button>
         <button type="button" class="btn btn-success" data-dismiss="modal">No</button>
+      </form>
       </div>
     </div>
   </div>
