@@ -48,13 +48,12 @@
 </div>
 
 <div class="form-group">
-<textarea cols='60' rows='4' class="textarea" id="api_field" disabled ></textarea>
+<textarea cols='60' rows='4' class="textarea" id="api_field" readonly></textarea>
 <?php echo form_error("task","<div class='text-danger'>","</div>") ?>
 </div>
 <div class="form-group">
   <button class="generate btn btn-success" type="button" >Generate</button>  <!-- type="button" is very important in here or-else this form submission makes page reload and ajax request can't be placed -->
-  <button type="button" class="btn btn-warning" onclick="copyToClipboard('#api_field')">Copy</button>
-  
+<button type="button" class="btn btn-warning" id="copy">Copy</button>
 </div>
 </div>
 </div>
