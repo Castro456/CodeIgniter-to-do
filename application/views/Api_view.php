@@ -14,15 +14,15 @@
 
 <nav class="navbar navbar-light">
   <a class="navbar-brand" href="home">
-    <img src="images/back-arrow.png" width="28" height="28" class="d-inline-block align-top" style="text-decoration:none">
-    Back
+    <img src="images/todoapp.png" width="30" height="30" class="d-inline-block align-top" style="text-decoration:none">
+    To-Do List Application
   </a>
   
   <form class="form-inline">
-    <a href="#">
+    <a href="profile">
       <img src="images/avatar.png" width="40" height="40" class="d-inline-block align-top mr-1">
     </a> 
-      <?php echo $this->session->userdata('user_name')?>    
+      <?php echo $this->session->userdata('user_fname')?>    
     <a class="btn btn-danger my-2 my-sm-0 rounded-pill ml-3" href="login/unset_session" role="button">
       <i class="bi bi-door-open"></i>
       Logout</a>
