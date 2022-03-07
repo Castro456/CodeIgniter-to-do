@@ -23,7 +23,6 @@ $(document).ready(function(){
         $(".save-btn").attr("disabled", true);
         $(".save-btn").text("Saving changes...");
 
-        var email = $("#email").val(); 
         var first_name = $("#fname").val(); 
         var last_name = $("#lname").val(); 
         var phone = $("#phone").val(); 
@@ -36,7 +35,6 @@ $(document).ready(function(){
             data:{
                 fname : first_name,
                 lname : last_name,
-                email : email,
                 phone : phone,
                 dob : dob,
                 age : age
@@ -70,19 +68,11 @@ $(document).ready(function(){
                     toastr.warning(message.message);
                 }
 
-                else if(message.message == "Enter valid email format"){
-                    toastr.warning(message.message);
-                }
-
                 else if(message.message == "Error Occurred"){
                     toastr.error(message.message);
                 }
 
                 else if(message.message == "This phone number already exits"){
-                    toastr.warning(message.message);
-                }
-
-                else if(message.message == "This email address already exits"){
                     toastr.warning(message.message);
                 }
 

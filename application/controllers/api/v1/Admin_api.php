@@ -35,13 +35,16 @@ class Admin_api extends REST_Controller
     if($this->session->userdata('user_validated') == true)
     {
       $user_id = $this->session->userdata('user_id');
+      $user_email = $this->session->userdata('user_email');
       $secret_key = $this->config->item('todo_secret_key');
       $api_data = array(
         'user_id' => $user_id,
+        'user_email' => $user_email
       );
       $encoded = JWT::encode($api_data,$secret_key);
       $this->response($encoded,200);
     }
+
     else
     {
       $email = $this->post('email');
@@ -84,6 +87,7 @@ class Admin_api extends REST_Controller
             $secret_key = $this->config->item('todo_secret_key');
             $api_data = array(
               'user_id' => $user_details['id'],
+              'user_email' => $user_details['email']
             );
             $encoded = JWT::encode($api_data,$secret_key);
             $this->response(array(
@@ -160,9 +164,7 @@ class Admin_api extends REST_Controller
     $last_name = trim($last_name);
     $last_name = $this->security->xss_clean($last_name);
 
-    $email = $this->post('email'); 
-    $email = trim($email);
-    $email = $this->security->xss_clean($email);
+    $email = '';
 
     $phone = $this->post('phone');
     $phone = trim($phone);
@@ -176,9 +178,10 @@ class Admin_api extends REST_Controller
     $age = trim($age);
     $age = $this->security->xss_clean($age);
 
-    if ($this->session->userdata('user_id'))
+    if ($this->session->userdata('user_validated') == true)
     {
       $user_id = $this->session->userdata('user_id');
+      $email = $this->session->userdata('user_email');
     }
 
     else if( ! empty($this->token['JWT']) )  // Header name should be 'JWT'
@@ -193,6 +196,7 @@ class Admin_api extends REST_Controller
       {
         $decode_token = JWT::decode($token,$secret_key);
         $user_id = $decode_token->user_id;
+        $email = $decode_token->user_email;
       }
       catch(Exception $e)
       {
@@ -212,9 +216,9 @@ class Admin_api extends REST_Controller
       ),500);
     }
 
-   if($user_id > 0)
+   if($user_id > 0 && $email != '')
    {
-      $user_details = $this->admin_model->get_user_details($user_id);
+      $user_details = $this->admin_model->get_user_details($user_id,$email);
       $update_user = false;
 
       if(empty($user_details) )
@@ -232,32 +236,6 @@ class Admin_api extends REST_Controller
          * If empty phone/first_name/last_name/dob/age is given. The API will not replace those fields as empty fields it just keeps its old data. To provide this feature the if condition is double checked with both for empty data and same data is being entered or not.
          * 
          */
-        if(!empty($email) && $email != $user_details['email'])
-        {
-            if(!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix",$email))
-            {
-              $this->response(array(
-                  "status" => 0,
-                  "message" => "Enter valid email format"
-                ),200);
-            }
-
-            $check_email = $this->login_model->check_email($email);
-  
-            if($check_email)
-            {
-              $this->response(array(
-                "status" => 0,
-                "message" => "This email address already exits"
-              ),200);
-            }
-  
-            else 
-            {
-              $update_user = $this->admin_model->set_email($email,$user_id);
-            }
-        }
-
         if(!empty($phone) && $phone != $user_details['phone'])
         {
             if(!preg_match("/^\d{10}$/",$phone)) {
@@ -283,7 +261,6 @@ class Admin_api extends REST_Controller
             }
         }
 
-  
         if(!empty($first_name) && $first_name != $user_details['firstname'])
         {
            if(!preg_match("/^[a-zA-Z]+$/",$first_name)) {
@@ -360,19 +337,11 @@ class Admin_api extends REST_Controller
   public function delete_user_post()
   {
 
-    $user_id = $this->post('user_id');
-    $user_id = trim($user_id);
-    $user_id = $this->security->xss_clean($user_id);
-
-    $email = $this->post('email');
-    $email = trim($email);
-    $email = $this->security->xss_clean($email);
-
-    $validated = false;
+    $user_id = 0;
     
     if($this->session->userdata('user_validated') == true)
     {
-      $validated = true;
+      $user_id = $this->session->userdata('user_id');
     }
 
     else if( ! empty($this->token['JWT']) )  // Header name should be 'JWT'
@@ -386,7 +355,7 @@ class Admin_api extends REST_Controller
       try
       {
         $decode_token = JWT::decode($token,$secret_key);
-        $validated = true;
+        $user_id = $decode_token->user_id;
       }
       catch(Exception $e)
       {
@@ -398,22 +367,43 @@ class Admin_api extends REST_Controller
       }
     }
 
-    if($validated == true)
+    if($user_id > 0)
     {
-      $check_user = $this->admin_model->check_email($user_id,$email);
-  
-      $task_id = $this->admin_model->get_task_id($user_id,$email);
-      // print_r ($task_id);
+      $task_id = $this->admin_model->get_task_id($user_id);
+
       if($task_id > 0)
       {
         foreach($task_id as $row)
         {
           $delete_user_task = $this->delete_model->index($row['id']);
-          // print_r($row);
         }
       }
-      $delete_user = $this->admin_model->delete_user($user_id,$email);
+
+      $delete_user = $this->admin_model->delete_user($user_id);
+
+      if($delete_user)
+      {
+        $memcached_password_key = 'user'.$email.'password';
+        $user_password = $this->memcached_library->delete($memcached_password_key);
+
+        $user_details_key = 'user'.$email.'details';
+        $user_details = $this->memcached_library->get($user_details_key);
+
+        $this->response(array(
+        "status" => 0,
+        "error" => "User deleted Successfully"
+        ),200);
+      }
+
+      else
+      {
+        $this->response(array(
+        "status" => 0,
+        "error" => "Unable to delete! Please try again"
+        ),200);
+      }
     }
+
     else
     {
       $this->response(array(
@@ -421,6 +411,7 @@ class Admin_api extends REST_Controller
         "error" => "Please provide a jwt token in the header to make an API request"
       ),500);
     }
+
   }
 
 

@@ -38,7 +38,7 @@ class Admin_model extends CI_Model
    */
   public function get_user_id($email)
   {
-    $this->db->select('id');
+    $this->db->select('id,email');
     $this->db->from('users_table');
     $this->db->where('email',$email);
     $data = $this->db->get(); 
@@ -54,12 +54,12 @@ class Admin_model extends CI_Model
    * Parameters : $user_id, $email
    * 
    */
-  public function get_user_details($user_id)
+  public function get_user_details($user_id,$email)
   {
     $this->db->select('firstname, lastname, email, phone, dob, age');
     $this->db->from('users_table');
     $this->db->where('id',$user_id);
-    // $this->db->where('email',$email);
+    $this->db->where('email',$email);
     $data = $this->db->get();
     return $data->row_array();
   }
@@ -119,14 +119,14 @@ class Admin_model extends CI_Model
    * Parameters : $email, $user_id
    * 
    */
-  public function set_email($email,$user_id)
-  {
-    $data = array(
-      'email' => $email
-    );
-    $this->db->where('id',$user_id);
-    return $this->db->update('users_table',$data);
-  }
+  // public function set_email($email,$user_id)
+  // {
+  //   $data = array(
+  //     'email' => $email
+  //   );
+  //   $this->db->where('id',$user_id);
+  //   return $this->db->update('users_table',$data);
+  // }
 
 
   /**
@@ -201,6 +201,19 @@ class Admin_model extends CI_Model
     $this->db->join("users_table","task_table.user = users_table.id");
     $id_data = $this->db->get();
     return $id_data->result_array();
-  }  
+  }
+  
+  
+  /**
+   * 
+   * To delete user
+   * Parameters : $user_id
+   * 
+   */
+  public function delete_user($user_id)
+  {
+    $this->db->where('id',$user_id);
+    return $this->db->update('users_table');
+  }
 }
 ?>

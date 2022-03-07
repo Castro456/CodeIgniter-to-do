@@ -77,10 +77,6 @@
                 </div>
 
                 <div class="row mt-2">
-                    <div class="col-md-6">
-                      <label for="email">Email</label>
-                      <input type="text" class="form-control mb-3" value="<?php echo $this->session->userdata('user_email')?>" disabled>
-                  </div>
                   <div class="col-md-6">
                       <label for="age">Age</label>
                       <input type="text" class="form-control mb-3" value="<?php echo $this->session->userdata('user_age')?>" disabled>
@@ -126,10 +122,6 @@
                 </div>
 
                 <div class="row mt-2">
-                    <div class="col-md-6">
-                        <label for="lname">Email</label>
-                        <input type="email" class="form-control mb-3" name="email" id="email" value="<?php echo $this->session->userdata('user_email')?>">
-                    </div>
                   <div class="col-md-6">
                       <label for="age">Age</label>
                       <input type="text" class="form-control mb-3" name="age" id="calage" value="<?php echo $this->session->userdata('user_age')?>" readonly>
