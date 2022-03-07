@@ -150,9 +150,7 @@ class Admin_api extends REST_Controller
   public function update_user_post()
   {
 
-    $user_id = $this->post('user_id');
-    $user_id = trim($user_id);
-    $user_id = $this->security->xss_clean($user_id);
+    $user_id = 0;
 
     $first_name = $this->post('fname');
     $first_name = trim($first_name);
@@ -178,11 +176,9 @@ class Admin_api extends REST_Controller
     $age = trim($age);
     $age = $this->security->xss_clean($age);
 
-    $validated = false;
-    
-    if($this->session->userdata('user_validated') == true)
+    if ($this->session->userdata('user_id'))
     {
-      $validated = true;
+      $user_id = $this->session->userdata('user_id');
     }
 
     else if( ! empty($this->token['JWT']) )  // Header name should be 'JWT'
@@ -196,7 +192,7 @@ class Admin_api extends REST_Controller
       try
       {
         $decode_token = JWT::decode($token,$secret_key);
-        $validated = true;
+        $user_id = $decode_token->user_id;
       }
       catch(Exception $e)
       {
@@ -208,12 +204,19 @@ class Admin_api extends REST_Controller
       }
     }
 
-    if($validated == true)
+    else
     {
+      $this->response(array(
+        "status" => 0,
+        "error" => "Please provide a jwt token in the header to make an API request"
+      ),500);
+    }
 
-      $user_details = $this->admin_model->get_user_details($user_id,$email);
+   if($user_id > 0)
+   {
+      $user_details = $this->admin_model->get_user_details($user_id);
       $update_user = false;
-  
+
       if(empty($user_details) )
       {
         $this->response(array(
@@ -229,8 +232,41 @@ class Admin_api extends REST_Controller
          * If empty phone/first_name/last_name/dob/age is given. The API will not replace those fields as empty fields it just keeps its old data. To provide this feature the if condition is double checked with both for empty data and same data is being entered or not.
          * 
          */
+        if(!empty($email) && $email != $user_details['email'])
+        {
+            if(!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix",$email))
+            {
+              $this->response(array(
+                  "status" => 0,
+                  "message" => "Enter valid email format"
+                ),200);
+            }
+
+            $check_email = $this->login_model->check_email($email);
+  
+            if($check_email)
+            {
+              $this->response(array(
+                "status" => 0,
+                "message" => "This email address already exits"
+              ),200);
+            }
+  
+            else 
+            {
+              $update_user = $this->admin_model->set_email($email,$user_id);
+            }
+        }
+
         if(!empty($phone) && $phone != $user_details['phone'])
         {
+            if(!preg_match("/^\d{10}$/",$phone)) {
+                $this->response(array(
+                "status" => 0,
+                "message" => "Enter valid phone number"
+              ),200);
+            }
+
             $check_phone = $this->admin_model->check_existing_phone($phone);
   
             if($check_phone)
@@ -243,28 +279,53 @@ class Admin_api extends REST_Controller
   
             else 
             {
-              $update_user = $this->admin_model->set_phone_number($phone,$email,$user_id);
+              $update_user = $this->admin_model->set_phone_number($phone,$user_id);
             }
         }
+
   
         if(!empty($first_name) && $first_name != $user_details['firstname'])
         {
-          $update_user = $this->admin_model->set_first_name($first_name,$email,$user_id);
+           if(!preg_match("/^[a-zA-Z]+$/",$first_name)) {
+                $this->response(array(
+                "status" => 0,
+                "message" => "Enter only characters for first name"
+              ),200);
+            }
+          $update_user = $this->admin_model->set_first_name($first_name,$user_id);
         }
   
         if(!empty($last_name) && $last_name != $user_details['lastname'])
         {
-          $update_user = $this->admin_model->set_last_name($last_name,$email,$user_id);
+            if(!preg_match("/^[a-zA-Z]+$/",$last_name)) {
+                $this->response(array(
+                "status" => 0,
+                "message" => "Enter only characters for last name"
+              ),200);
+            }
+          $update_user = $this->admin_model->set_last_name($last_name,$user_id);
         }
   
         if(!empty($dob) && $dob != $user_details['dob'])
         {
-          $update_user = $this->admin_model->set_dob($dob,$email,$user_id);
+          if(!preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$dob)) { 
+            $this->response(array(
+            "status" => 0,
+            "message" => "Enter valid date"
+            ),200);
+          }
+          $update_user = $this->admin_model->set_dob($dob,$user_id);
         }
   
         if(!empty($age) && $age != $user_details['age'])
         {
-          $update_user = $this->admin_model->set_age($age,$email,$user_id);
+          if(!preg_match("/^\d{1,3}$/",$age)) { 
+            $this->response(array(
+            "status" => 0,
+            "message" => "Enter valid age"
+            ),200);
+          }
+          $update_user = $this->admin_model->set_age($age,$user_id);
         }
   
         if($update_user === true)
@@ -292,17 +353,9 @@ class Admin_api extends REST_Controller
           ),200);
         }
       }
-    }
-    else
-    {
-      $this->response(array(
-        "status" => 0,
-        "error" => "Please provide a jwt token in the header to make an API request"
-      ),500);
-    }
     
+    }
   }
-
 
   public function delete_user_post()
   {

@@ -68,19 +68,23 @@
                 <div class="row mt-2">
                     <div class="col-md-6">
                       <label for="phone">Phone</label>
-                      <input type="text" class="form-control mb-3" name="phone" value="<?php echo $this->session->userdata('user_phone')?>" disabled>
+                      <input type="text" class="form-control mb-3" value="<?php echo $this->session->userdata('user_phone')?>" disabled>
                      </div>
                     <div class="col-md-6">
                         <label for="dob">Date of Birth</label>
-                        <input type="date" class="form-control mb-3" name="dob" placeholder="Email" value="<?php echo $this->session->userdata('user_dob')?>" disabled>
+                        <input type="date" class="form-control mb-3" value="<?php echo $this->session->userdata('user_dob')?>" disabled>
                     </div>
                 </div>
 
                 <div class="row mt-2">
                     <div class="col-md-6">
+                      <label for="email">Email</label>
+                      <input type="text" class="form-control mb-3" value="<?php echo $this->session->userdata('user_email')?>" disabled>
+                  </div>
+                  <div class="col-md-6">
                       <label for="age">Age</label>
-                      <input type="text" class="form-control mb-3" name="age" value="<?php echo $this->session->userdata('user_age')?>" disabled>
-                     </div>
+                      <input type="text" class="form-control mb-3" value="<?php echo $this->session->userdata('user_age')?>" disabled>
+                    </div>
                 </div>
                 </div>
             </div>
@@ -94,8 +98,6 @@
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
     <form method="post">
-      <input type="hidden" name="user_id" id="user-id" value="<?php echo $this->session->userdata('user_id')?>">
-      <input type="hidden" name="email" id="email" value="<?php echo $this->session->userdata('user_email')?>">
       <div class="modal-header text-center d-block">
         <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
         </button>
@@ -119,15 +121,19 @@
                      </div>
                     <div class="col-md-6">
                         <label for="dob">Date of Birth</label>
-                        <input type="date" class="form-control mb-3" id="dob" name="dob" placeholder="Email" value="<?php echo $this->session->userdata('user_dob')?>">
+                        <input type="date" class="form-control mb-3" id="dob" name="dob" value="<?php echo $this->session->userdata('user_dob')?>">
                     </div>
                 </div>
 
                 <div class="row mt-2">
                     <div class="col-md-6">
+                        <label for="lname">Email</label>
+                        <input type="email" class="form-control mb-3" name="email" id="email" value="<?php echo $this->session->userdata('user_email')?>">
+                    </div>
+                  <div class="col-md-6">
                       <label for="age">Age</label>
                       <input type="text" class="form-control mb-3" name="age" id="calage" value="<?php echo $this->session->userdata('user_age')?>" readonly>
-                     </div>
+                  </div>
                 </div>
             </div>
       <div class="modal-footer">
@@ -166,15 +172,15 @@
     </div>
   </div>
 </div>
-<!-- Edit Modal End -->
+<!-- Delete Modal End -->
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script>
-$(".modal").on("hidden.bs.modal", function(){
-     $(this).find('form').trigger('reset');
-});
+// $(".modal").on("hidden.bs.modal", function(){
+//      $(this).find('form').trigger('reset');
+// });
 </script>
 <script src="./js/jquery.js"></script>
 <script src="./js/agecal.js"></script>

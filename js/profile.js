@@ -23,7 +23,6 @@ $(document).ready(function(){
         $(".save-btn").attr("disabled", true);
         $(".save-btn").text("Saving changes...");
 
-        var user_id = $("#user-id").val(); 
         var email = $("#email").val(); 
         var first_name = $("#fname").val(); 
         var last_name = $("#lname").val(); 
@@ -35,7 +34,6 @@ $(document).ready(function(){
             url: "api/admin/update-user",
             type: "POST",
             data:{
-                user_id : user_id,
                 fname : first_name,
                 lname : last_name,
                 email : email,
@@ -52,11 +50,39 @@ $(document).ready(function(){
                     toastr.warning(message.message);
                 }
 
+                else if(message.message == "Enter only characters for first name"){
+                    toastr.warning(message.message);
+                }
+
+                else if(message.message == "Enter only characters for last name"){
+                    toastr.warning(message.message);
+                }
+
+                else if(message.message == "Enter valid date"){
+                    toastr.warning(message.message);
+                }
+
+                else if(message.message == "Enter valid age"){
+                    toastr.warning(message.message);
+                }
+
+                else if(message.message == "Enter valid phone number"){
+                    toastr.warning(message.message);
+                }
+
+                else if(message.message == "Enter valid email format"){
+                    toastr.warning(message.message);
+                }
+
                 else if(message.message == "Error Occurred"){
                     toastr.error(message.message);
                 }
 
                 else if(message.message == "This phone number already exits"){
+                    toastr.warning(message.message);
+                }
+
+                else if(message.message == "This email address already exits"){
                     toastr.warning(message.message);
                 }
 
@@ -71,7 +97,7 @@ $(document).ready(function(){
                 }
 
                 else{
-                    toastr.error("Problem Occurred");
+                    toastr.error(message.message);
                 }
 
             },

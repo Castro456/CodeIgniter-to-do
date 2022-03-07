@@ -54,12 +54,12 @@ class Admin_model extends CI_Model
    * Parameters : $user_id, $email
    * 
    */
-  public function get_user_details($user_id,$email)
+  public function get_user_details($user_id)
   {
     $this->db->select('firstname, lastname, email, phone, dob, age');
     $this->db->from('users_table');
     $this->db->where('id',$user_id);
-    $this->db->where('email',$email);
+    // $this->db->where('email',$email);
     $data = $this->db->get();
     return $data->row_array();
   }
@@ -68,16 +68,15 @@ class Admin_model extends CI_Model
   /**
    * 
    * To update user first name
-   * Parameters : $first_name, $email, $user_id
+   * Parameters : $first_name, $user_id
    * 
    */
-  public function set_first_name($first_name,$email,$user_id)
+  public function set_first_name($first_name,$user_id)
   {
     $data = array(
       'firstname' => $first_name
     );
     $this->db->where('id',$user_id);
-    $this->db->where('email',$email);
     return $this->db->update('users_table',$data);
   }
 
@@ -85,16 +84,15 @@ class Admin_model extends CI_Model
   /**
    * 
    * To update user last name
-   * Parameters : $last_name, $email, $user_id
+   * Parameters : $last_name, $user_id
    * 
    */
-  public function set_last_name($last_name,$email,$user_id)
+  public function set_last_name($last_name,$user_id)
   {
     $data = array(
       'lastname' => $last_name
     );
     $this->db->where('id',$user_id);
-    $this->db->where('email',$email);
     return $this->db->update('users_table',$data);
   }
 
@@ -102,16 +100,15 @@ class Admin_model extends CI_Model
   /**
    * 
    * To update user phone number
-   * Parameters : $phone, $email, $user_id
+   * Parameters : $phone, $user_id
    * 
    */
-  public function set_phone_number($phone,$email,$user_id)
+  public function set_phone_number($phone,$user_id)
   {
     $data = array(
       'phone' => $phone
     );
     $this->db->where('id',$user_id);
-    $this->db->where('email',$email);
     return $this->db->update('users_table',$data);
   }
 
@@ -119,16 +116,15 @@ class Admin_model extends CI_Model
   /**
    * 
    * To update user email
-   * Parameters : $email, $phone, $user_id
+   * Parameters : $email, $user_id
    * 
    */
-  public function set_email($email,$phone,$user_id)
+  public function set_email($email,$user_id)
   {
     $data = array(
       'email' => $email
     );
     $this->db->where('id',$user_id);
-    $this->db->where('phone',$phone);
     return $this->db->update('users_table',$data);
   }
 
@@ -161,16 +157,15 @@ class Admin_model extends CI_Model
   /**
    * 
    * To update user date of birth
-   * Parameters : $dob, $email, $user_id
+   * Parameters : $dob, $user_id
    * 
    */
-  public function set_dob($dob,$email,$user_id)
+  public function set_dob($dob,$user_id)
   {
     $data = array(
       'dob' => $dob
     );
     $this->db->where('id',$user_id);
-    $this->db->where('email',$email);
     return $this->db->update('users_table',$data);
   }
 
@@ -178,16 +173,15 @@ class Admin_model extends CI_Model
   /**
    * 
    * To update user age
-   * Parameters : $age, $email, $user_id
+   * Parameters : $age, $user_id
    * 
    */
-  public function set_age($age,$email,$user_id)
+  public function set_age($age,$user_id)
   {
     $data = array(
       'age' => $age
     );
     $this->db->where('id',$user_id);
-    $this->db->where('email',$email);
     return $this->db->update('users_table',$data);
   }
 

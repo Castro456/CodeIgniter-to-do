@@ -14,8 +14,8 @@
 
 <nav class="navbar navbar-light">
   <a class="navbar-brand" href="home">
-    <img src="images/todoapp.png" width="30" height="30" class="d-inline-block align-top" style="text-decoration:none">
-    To-Do List Application
+    <img src="images/back-arrow.png" width="28" height="28" class="d-inline-block align-top" style="text-decoration:none">
+    Back
   </a>
   
   <form class="form-inline">
