@@ -97,4 +97,41 @@ $(document).ready(function(){
             }
         })
     })
+
+    $("#user_delete_btn").on("click",function(){
+        
+        $("#user_delete_btn").attr("disable",true)
+        $("#user_delete_btn").text("Please Wait...")
+
+        $.ajax({
+            url: "api/admin/delete-user",
+            type: "POST",
+            success: function(message){
+
+                $("#user_delete_btn").attr("disable",true)
+                $("#user_delete_btn").text("Yes")
+
+                if(message.message == "User deleted Successfully")
+                {
+                    toastr.error("Your account has been deleted")
+                    window.setTimeout(function() {
+                        window.location.replace("login/unset_session");
+                    }, 1500);
+                }
+                else if(message.message == "Unable to delete! Please try again")
+                {
+                    toastr.warning("Unable to delete! Please try again")
+                }
+                else
+                {
+                    toastr.error(message.message)
+                }
+            },
+            error: function(message){
+                $("#user_delete_btn").attr("disable",true)
+                $("#user_delete_btn").text("Yes")
+                toastr.error(message.error)
+            }
+        })
+    })
 })

@@ -213,7 +213,7 @@ class Admin_model extends CI_Model
   public function delete_user($user_id)
   {
     $this->db->where('id',$user_id);
-    return $this->db->update('users_table');
+    return $this->db->delete('users_table');
   }
 }
 ?>

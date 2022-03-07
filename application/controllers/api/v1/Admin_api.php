@@ -338,10 +338,12 @@ class Admin_api extends REST_Controller
   {
 
     $user_id = 0;
+    $email = '';
     
     if($this->session->userdata('user_validated') == true)
     {
       $user_id = $this->session->userdata('user_id');
+      $email = $this->session->userdata('user_email');
     }
 
     else if( ! empty($this->token['JWT']) )  // Header name should be 'JWT'
@@ -356,6 +358,7 @@ class Admin_api extends REST_Controller
       {
         $decode_token = JWT::decode($token,$secret_key);
         $user_id = $decode_token->user_id;
+        $email = $decode_token->user_email;
       }
       catch(Exception $e)
       {
@@ -367,7 +370,7 @@ class Admin_api extends REST_Controller
       }
     }
 
-    if($user_id > 0)
+    if($user_id > 0 && $email != '')
     {
       $task_id = $this->admin_model->get_task_id($user_id);
 
@@ -387,11 +390,11 @@ class Admin_api extends REST_Controller
         $user_password = $this->memcached_library->delete($memcached_password_key);
 
         $user_details_key = 'user'.$email.'details';
-        $user_details = $this->memcached_library->get($user_details_key);
+        $user_details = $this->memcached_library->delete($user_details_key);
 
         $this->response(array(
         "status" => 0,
-        "error" => "User deleted Successfully"
+        "message" => "User deleted Successfully"
         ),200);
       }
 
@@ -399,7 +402,7 @@ class Admin_api extends REST_Controller
       {
         $this->response(array(
         "status" => 0,
-        "error" => "Unable to delete! Please try again"
+        "message" => "Unable to delete! Please try again"
         ),200);
       }
     }
