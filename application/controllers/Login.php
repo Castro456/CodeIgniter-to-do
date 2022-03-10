@@ -79,13 +79,22 @@ class Login extends CI_Controller {
 
   }
 
+
+  
+  /**
+   * 
+   * This Method is just for testing purpose.
+   * 
+   */
   public function delete_mem()
   {
-    $memcached_password_key = 'usercastro@geedesk.compassword';
+    $memcached_password_key = 'user'.$this->email.'password';
     $user_password = $this->memcached_library->delete($memcached_password_key);
-    $user_details_key = 'usercastro@geedesk.comdetails';
+    $user_details_key = 'user'.$this->email.'details';
     $user_details = $this->memcached_library->delete($user_details_key);
   }
+
+
 
   public function check_password()
   {
@@ -148,6 +157,7 @@ class Login extends CI_Controller {
 
     $this->session->set_userdata($session_data);
   }
+
 
 
   public function unset_session()
