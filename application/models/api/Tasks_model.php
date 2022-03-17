@@ -21,11 +21,11 @@ class Tasks_model extends CI_Model
   */
   public function get_task($id)
   {
-    $this->db->select('task, progress');
+    $this->db->select('id, task, time_kept, progress');
     $this->db->from('task_table');
-    $this->db->where('id',$id);
+    $this->db->where('user',$id);
     $query = $this->db->get();
-    return $query->result();
+    return $query->result_array();
   }
 
 
