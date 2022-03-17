@@ -135,4 +135,70 @@ class Tasks_api extends REST_Controller
             ),200);
         }
     }
+
+
+
+    public function delete_task_post()
+    {
+        $task_id = $this->post('task_id');
+        $task_id = trim($task_id);
+        $task_id = $this->security->xss_clean($task_id);
+
+        if(!empty($task_id) && is_numeric($task_id))
+        {
+            if( ! empty($this->token['JWT']) )  // Header name should be 'JWT'
+            {
+                $token = $this->token['JWT']; 
+                $token = trim($token);
+                $token = $this->security->xss_clean($token);
+    
+                $secret_key = $this->config->item('todo_secret_key'); // From file 'secret_key.php' the key is stored in type array.
+    
+                try
+                {
+                    $decode_token = JWT::decode($token,$secret_key);
+                    $user_id = $decode_token->user_id;
+                    $task_data = $this->tasks_model->delete_task($user_id,$task_id);
+    
+                    if ($task_data == TRUE) 
+                    {
+                    $this->response(array(
+                        "status"=> "1",
+                        "message"=> "Task deleted successfully",
+                    ),200);
+                    }
+    
+                    else 
+                    {
+                    $this->response(array(
+                        "status"=> "0",
+                        "message"=> "No Task deleted. Please try again!"
+                        ),200);
+                    }
+                }
+                catch(Exception $e)
+                {
+                    $error = $e->getMessage();
+                    $this->response(array(
+                    "status" => 0,
+                    "error" => $error
+                    ),500);
+                }
+            }
+            else
+            {
+                $this->response(array(
+                    "status" => 0,
+                    "error" => "Please provide a jwt token in the header to make an API request"
+                ),500);
+            }
+        }
+        else
+        {
+            $this->response(array(
+                "status" => 0,
+                "message" => "Enter a task_id to delete"
+            ),200);
+        }
+    }
 }

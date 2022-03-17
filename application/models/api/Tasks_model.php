@@ -56,9 +56,10 @@ class Tasks_model extends CI_Model
    * To Delete a Task
    * used in method taskdelete_delete()
   */
-  public function delete_task($taskid)
+  public function delete_task($user_id,$task_id)
   {
-    $this->db->where("id", $taskid);
+    $this->db->where("user", $user_id);
+    $this->db->where("id", $task_id);
     $result = $this->db->delete("task_table");
     if ($result)
     {
