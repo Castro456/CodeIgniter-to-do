@@ -70,4 +70,69 @@ class Tasks_api extends REST_Controller
             ),500);
         }
     }
+
+
+    public function add_task_post()
+    {
+        $task = $this->post('task');
+        $task = trim($task);
+        $task = $this->security->xss_clean($task);
+
+        if(!empty($task))
+        {
+            if( ! empty($this->token['JWT']) )  // Header name should be 'JWT'
+            {
+                $token = $this->token['JWT']; 
+                $token = trim($token);
+                $token = $this->security->xss_clean($token);
+    
+                $secret_key = $this->config->item('todo_secret_key'); // From file 'secret_key.php' the key is stored in type array.
+    
+                try
+                {
+                    $decode_token = JWT::decode($token,$secret_key);
+                    $user_id = $decode_token->user_id;
+                    $task_data = $this->tasks_model->add_task($user_id,$task);
+    
+                    if ($task_data == TRUE) 
+                    {
+                    $this->response(array(
+                        "status"=> "1",
+                        "message"=> "Task added successfully",
+                    ),200);
+                    }
+    
+                    else 
+                    {
+                    $this->response(array(
+                        "status"=> "0",
+                        "message"=> "No Task added. Please try again!"
+                        ),200);
+                    }
+                }
+                catch(Exception $e)
+                {
+                    $error = $e->getMessage();
+                    $this->response(array(
+                    "status" => 0,
+                    "error" => $error
+                    ),500);
+                }
+            }
+            else
+            {
+                $this->response(array(
+                    "status" => 0,
+                    "error" => "Please provide a jwt token in the header to make an API request"
+                ),500);
+            }
+        }
+        else
+        {
+            $this->response(array(
+                "status" => 0,
+                "message" => "Enter a task to add"
+            ),200);
+        }
+    }
 }

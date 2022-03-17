@@ -75,13 +75,13 @@ class Tasks_model extends CI_Model
    * To Add a Task
    * used in method taskadd_post()
   */
-  public function add_task($userid,$task)
+  public function add_task($user_id,$task)
   {
-    $content = array(
-      'user' => $userid,
+    $data = array(
+      'user' => $user_id,
       'task' => $task
     );
-    $result = $this->db->insert("task_table",$content);
+    $result = $this->db->insert("task_table",$data);
 
     if ($result)
     {
