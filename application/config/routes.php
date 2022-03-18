@@ -24,6 +24,7 @@ $route['api/admin/delete-user'] = 'api/v1/admin_api/delete_user';
 $route['api/user/tasks'] = 'api/v1/tasks_api/list_task';
 $route['api/user/add-task'] = 'api/v1/tasks_api/add_task';
 $route['api/user/delete-task'] = 'api/v1/tasks_api/delete_task';
+$route['api/user/update-task'] = 'api/v1/tasks_api/update_task';
 
 
 /*Default Controller */

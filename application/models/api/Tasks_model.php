@@ -1,9 +1,11 @@
 <?php
+
 class Tasks_model extends CI_Model
 {
   /**
+   * 
    * To get all the Tasks
-   * used in method view_get()
+   * 
   */
   public function get_all_task()
   {
@@ -16,8 +18,9 @@ class Tasks_model extends CI_Model
 
 
   /**
-   * To get a specfic Task
-   * used in method oneview_get()
+   * 
+   * To get a user specific Task
+   * 
   */
   public function get_task($id)
   {
@@ -30,15 +33,18 @@ class Tasks_model extends CI_Model
 
 
   /**
+   * 
    * To Update a Task
-   * used in method taskupdate_put()
+   * 
   */
-  public function update_task($id,$task)
+  public function update_task($task_id,$task,$user_id)
   {
     $data = array(
       'task' => $task
     );
-    $this->db->where('id', $id);
+
+    $this->db->where('id', $task_id);
+    $this->db->where('user', $user_id);
     $result = $this->db->update('task_table',$data);
 
     if($result)
@@ -53,8 +59,9 @@ class Tasks_model extends CI_Model
 
 
   /**
+   * 
    * To Delete a Task
-   * used in method taskdelete_delete()
+   * 
   */
   public function delete_task($user_id,$task_id)
   {
@@ -73,8 +80,9 @@ class Tasks_model extends CI_Model
 
 
   /**
+   * 
    * To Add a Task
-   * used in method taskadd_post()
+   * 
   */
   public function add_task($user_id,$task)
   {
@@ -96,10 +104,11 @@ class Tasks_model extends CI_Model
   
 
   /**
-   * To Update a Task status
-   * used in method task_status_put()
+   * 
+   * To Update a Task Progress
+   * 
   */
-  public function task_status($task_id,$progress)
+  public function update_progress($task_id,$progress)
   {
     $data = array(
       'progress' => $progress
@@ -107,8 +116,32 @@ class Tasks_model extends CI_Model
 
     $this->db->where("id",$task_id);
     $result = $this->db->update("task_table",$data);
-    return $result;
+    
+    if ($result)
+    {
+      return TRUE;
+    }
+    else 
+    {
+      return FALSE;
+    }
 
+  }
+
+
+  /**
+   * 
+   * Get only task, progress for updating the task
+   * 
+   */
+  public function get_task_and_progress($task_id,$user_id)
+  {
+    $this->db->select('task, progress');
+    $this->db->from('task_table');
+    $this->db->where('id',$task_id);
+    $this->db->where('user',$user_id);
+    $data = $this->db->get();
+    return $data->row_array();
   }
 
 
