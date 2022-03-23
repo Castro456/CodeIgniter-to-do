@@ -9,7 +9,8 @@
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/global.css">
-    <link href="css/toastr.scss" rel="stylesheet"/>
+    <!-- <link href="css/toastr.scss" rel="stylesheet"/> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="icon" type="image/png"  href="images/todoapp.png">
 </head>
@@ -173,6 +174,8 @@
 <script src="./js/jquery.js"></script>
 <script src="./js/agecal.js"></script>
 <script src="./js/profile.js"></script>
-<script src="./js/toastr.js"></script>
+<!-- <script src="./js/toastr.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.js.map"></script>
 </body>
 </html>
