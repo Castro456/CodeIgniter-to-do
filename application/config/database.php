@@ -74,14 +74,12 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	=> 'mysql:host=localhost;
-	            dbname=mydata;
-				charset=utf8;',
-	'hostname' => 'localhost',
+	'dsn'	=> '',
+	'hostname' => 'todoappdb',
 	'username' => 'root',
-	'password' => 'giveaccess',
+	'password' => 'run',
 	'database' => 'mydata',
-	'dbdriver' => 'pdo',
+	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
