@@ -1,6 +1,14 @@
 <?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * 
+ * 
+ * @author Castro456 <castrosid456@gmail.com>
+ * ---------------   THIS API IS NO LONGER SUPPORTED   ----------------
+ * ---------------   DON'T USE THIS    --------------------------------
+ * 
+ */
 require (APPPATH.'libraries/REST_Controller.php');
 // use chriskacerguis\RestServer\RestController;
 
