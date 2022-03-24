@@ -65,11 +65,16 @@ class Tasks_model extends CI_Model
   */
   public function delete_task($user_id,$task_id)
   {
-    $this->db->where("user", $user_id);
+    $this->db->select('id');
+    $this->db->from('task_table');
     $this->db->where("id", $task_id);
-    $result = $this->db->delete("task_table");
+    $this->db->where("user", $user_id);
+    $check = $this->db->get();
+    $result = $check->row();
     if ($result)
     {
+      $this->db->where("id", $task_id);
+      $delete = $this->db->delete("task_table");
       return TRUE;
     }
     else 

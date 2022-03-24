@@ -22,9 +22,9 @@ class Tasks_api extends REST_Controller
 
     public function list_task_get()
     {
-        if( ! empty($this->token['JWT']) )  // Header name should be 'JWT'
+        if( ! empty($this->token['Authorization']) )  // Header name should be 'Authorization'
         {
-            $token = $this->token['JWT']; 
+            $token = $this->token['Authorization']; 
             $token = trim($token);
             $token = $this->security->xss_clean($token);
 
@@ -80,9 +80,9 @@ class Tasks_api extends REST_Controller
 
         if(!empty($task))
         {
-            if( ! empty($this->token['JWT']) )  // Header name should be 'JWT'
+            if( ! empty($this->token['Authorization']) )  // Header name should be 'Authorization'
             {
-                $token = $this->token['JWT']; 
+                $token = $this->token['Authorization']; 
                 $token = trim($token);
                 $token = $this->security->xss_clean($token);
     
@@ -146,9 +146,9 @@ class Tasks_api extends REST_Controller
 
         if(!empty($task_id) && is_numeric($task_id))
         {
-            if( ! empty($this->token['JWT']) )  // Header name should be 'JWT'
+            if( ! empty($this->token['Authorization']) )  // Header name should be 'Authorization'
             {
-                $token = $this->token['JWT']; 
+                $token = $this->token['Authorization']; 
                 $token = trim($token);
                 $token = $this->security->xss_clean($token);
     
@@ -221,9 +221,9 @@ class Tasks_api extends REST_Controller
         $allowed_progress = ["In progress","Done"];
         $update = FALSE;
 
-        if( ! empty($this->token['JWT']) )  // Header name should be 'JWT'
+        if( ! empty($this->token['Authorization']) )  // Header name should be 'Authorization'
         {
-            $token = $this->token['JWT']; 
+            $token = $this->token['Authorization']; 
             $token = trim($token);
             $token = $this->security->xss_clean($token);
 
@@ -270,7 +270,7 @@ class Tasks_api extends REST_Controller
                         {
                             $this->response(array(
                                 "status" => 0,
-                                "message" => "There is nothing to save"
+                                "message" => "There is nothing to change"
                             ),200);
                         }
                     }
