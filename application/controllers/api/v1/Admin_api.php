@@ -184,9 +184,9 @@ class Admin_api extends REST_Controller
       $email = $this->session->userdata('user_email');
     }
 
-    else if( ! empty($this->token['JWT']) )  // Header name should be 'JWT'
+    else if( ! empty($this->token['Authorization']) )  // Header name should be 'Authorization'
     {
-      $token = $this->token['JWT']; 
+      $token = $this->token['Authorization']; 
       $token = trim($token);
       $token = $this->security->xss_clean($token);
 
@@ -346,9 +346,9 @@ class Admin_api extends REST_Controller
       $email = $this->session->userdata('user_email');
     }
 
-    else if( ! empty($this->token['JWT']) )  // Header name should be 'JWT'
+    else if( ! empty($this->token['Authorization']) )  // Header name should be 'Authorization'
     {
-      $token = $this->token['JWT']; 
+      $token = $this->token['Authorization']; 
       $token = trim($token);
       $token = $this->security->xss_clean($token);
 
