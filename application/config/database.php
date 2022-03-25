@@ -75,11 +75,23 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'todoappdb',
+
+	// Settings for running this app in Docker
+	'hostname' => 'todoappdb', // Hostname of the database server, So the container name of the mysql is todoappdb.
 	'username' => 'root',
-	'password' => 'run',
-	'database' => 'mydata',
+	'password' => 'giveaccess',
+	'database' => 'tododb',
 	'dbdriver' => 'mysqli',
+	// End
+	
+	//Settings for running this app in Localhost
+	// hostname' => 'localhost', 
+	// 'username' => '<your username>',
+	// 'password' => '<your password>',
+	// 'database' => 'tododb',
+	// 'dbdriver' => 'mysqli',
+	// End
+
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 22, 2022 at 01:50 PM
+-- Generation Time: Mar 25, 2022 at 10:46 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `mydata`
+-- Database: `tododb`
 --
 
 -- --------------------------------------------------------
@@ -64,7 +64,7 @@ CREATE TABLE `users_table` (
 --
 
 INSERT INTO `users_table` (`id`, `firstname`, `lastname`, `email`, `pass_word`, `phone`, `dob`, `age`) VALUES
-(1, 'Sample', 'Run', 'sample@gmail.com', 'sample11', ' 9865412156', '2020-01-01', 2);
+(1, 'Sample', 'Run', 'sample@gmail.com', '$2y$10$YxwEXcU0hRhtCxQyco3SKudboSVDQdOitljO7lqekW1RwzODRNlju', ' 1165412122', '2000-05-02', 21);
 
 --
 -- Indexes for dumped tables

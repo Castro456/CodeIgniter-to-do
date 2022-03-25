@@ -14,8 +14,8 @@ services:
     container_name: todoappdb
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: run
-      MYSQL_DATABASE: mydata
+      MYSQL_ROOT_PASSWORD: giveaccess
+      MYSQL_DATABASE: tododb
     volumes:
       - todoappvol:/var/lib/mysql
 

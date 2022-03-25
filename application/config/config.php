@@ -23,7 +23,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
+
+// For Docker
 $config['base_url'] = 'http://localhost:4006/';
+
+// For Localhost
+// $config['base_url'] = 'http://localhost/todo/';
 
 /*
 |--------------------------------------------------------------------------
@@ -380,8 +385,12 @@ $config['encryption_key'] = '';
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'ci_session';
 $config['sess_expiration'] = 7200;
+// For Localhost
 // $config['sess_save_path'] = NULL;
-$config['sess_save_path'] = sys_get_temp_dir();
+
+// For Docker
+$config['sess_save_path'] = sys_get_temp_dir(); // Stores the session variable in temporary path
+
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;
