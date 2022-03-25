@@ -263,7 +263,7 @@ class Admin_api extends REST_Controller
 
         if(!empty($first_name) && $first_name != $user_details['firstname'])
         {
-           if(!preg_match("/^[a-zA-Z]+$/",$first_name)) {
+           if(!preg_match('/^[a-zA-Z\s]+$/', $first_name)) {
                 $this->response(array(
                 "status" => 0,
                 "message" => "Enter only characters for first name"
@@ -274,7 +274,7 @@ class Admin_api extends REST_Controller
   
         if(!empty($last_name) && $last_name != $user_details['lastname'])
         {
-            if(!preg_match("/^[a-zA-Z]+$/",$last_name)) {
+            if(!preg_match('/^[a-zA-Z\s]+$/', $last_name)) {
                 $this->response(array(
                 "status" => 0,
                 "message" => "Enter only characters for last name"
