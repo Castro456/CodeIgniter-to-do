@@ -38,19 +38,19 @@ class Tasks_api extends REST_Controller
 
                 if (count($task_data) > 0) 
                 {
-                $this->response(array(
-                    "status"=> "1",
-                    "message"=> "Task Found",
-                    "data"=> $task_data
-                ),200);
+                    $this->response(array(
+                        "status"=> "1",
+                        "message"=> "Task Found",
+                        "data"=> $task_data
+                    ),200);
                 }
 
                 else 
                 {
-                $this->response(array(
-                    "status"=> "0",
-                    "message"=> "No Task Found"
-                ),200);
+                    $this->response(array(
+                        "status"=> "0",
+                        "message"=> "No Task Found"
+                    ),404);
                 }
             }
             catch(Exception $e)
@@ -59,7 +59,7 @@ class Tasks_api extends REST_Controller
                 $this->response(array(
                     "status" => 0,
                     "error" => $error
-                ),500);
+                ),401);
             }
         }
         else
@@ -67,7 +67,7 @@ class Tasks_api extends REST_Controller
             $this->response(array(
                 "status" => 0,
                 "error" => "Please provide a jwt token in the header to make an API request"
-            ),500);
+            ),404);
         }
     }
 
@@ -96,18 +96,18 @@ class Tasks_api extends REST_Controller
     
                     if ($task_data == TRUE) 
                     {
-                    $this->response(array(
-                        "status"=> "1",
-                        "message"=> "Task added successfully",
-                    ),200);
+                        $this->response(array(
+                            "status"=> "1",
+                            "message"=> "Task added successfully",
+                        ),200);
                     }
     
                     else 
                     {
-                    $this->response(array(
-                        "status"=> "0",
-                        "message"=> "No Task added. Please try again!"
-                    ),200);
+                        $this->response(array(
+                            "status"=> "0",
+                            "message"=> "No Task added. Please try again!"
+                        ),500);
                     }
                 }
                 catch(Exception $e)
@@ -116,7 +116,7 @@ class Tasks_api extends REST_Controller
                     $this->response(array(
                         "status" => 0,
                         "error" => $error
-                    ),500);
+                    ),401);
                 }
             }
             else
@@ -124,7 +124,7 @@ class Tasks_api extends REST_Controller
                 $this->response(array(
                     "status" => 0,
                     "error" => "Please provide a jwt token in the header to make an API request"
-                ),500);
+                ),404);
             }
         }
         else
@@ -132,7 +132,7 @@ class Tasks_api extends REST_Controller
             $this->response(array(
                 "status" => 0,
                 "message" => "Enter a task to add"
-            ),200);
+            ),404);
         }
     }
 
@@ -162,18 +162,18 @@ class Tasks_api extends REST_Controller
     
                     if ($task_data == TRUE) 
                     {
-                    $this->response(array(
-                        "status"=> "1",
-                        "message"=> "Task deleted successfully",
-                    ),200);
+                        $this->response(array(
+                            "status"=> "1",
+                            "message"=> "Task deleted successfully",
+                        ),200);
                     }
     
                     else 
                     {
-                    $this->response(array(
-                        "status"=> "0",
-                        "message"=> "No Task deleted. Please try again!"
-                    ),200);
+                        $this->response(array(
+                            "status"=> "0",
+                            "message"=> "No Task deleted. Please try again!"
+                        ),500);
                     }
                 }
                 catch(Exception $e)
@@ -182,7 +182,7 @@ class Tasks_api extends REST_Controller
                     $this->response(array(
                         "status" => 0,
                         "error" => $error
-                    ),500);
+                    ),401);
                 }
             }
             else
@@ -190,7 +190,7 @@ class Tasks_api extends REST_Controller
                 $this->response(array(
                     "status" => 0,
                     "error" => "Please provide a jwt token in the header to make an API request"
-                ),500);
+                ),404);
             }
         }
         else
@@ -198,7 +198,7 @@ class Tasks_api extends REST_Controller
             $this->response(array(
                 "status" => 0,
                 "message" => "Enter a task_id to delete"
-            ),200);
+            ),404);
         }
     }
 
@@ -255,7 +255,7 @@ class Tasks_api extends REST_Controller
                                 $this->response(array(
                                         "status" => 0,
                                         "message" => "Enter valid progress field"
-                                ),200);
+                                ),401);
                             }                      
                         } 
 
@@ -287,7 +287,7 @@ class Tasks_api extends REST_Controller
                     $this->response(array(
                         "status" => 0,
                         "message" => "Enter a task_id or valid task_id"
-                    ),200);
+                    ),404);
                 }
             }
             catch(Exception $e)
@@ -296,7 +296,7 @@ class Tasks_api extends REST_Controller
                 $this->response(array(
                     "status" => 0,
                     "error" => $error
-                ),500);
+                ),401);
             } 
         }
         else
@@ -304,7 +304,7 @@ class Tasks_api extends REST_Controller
             $this->response(array(
                 "status" => 0,
                 "message" => "Please provide a jwt token in the header to make an API request"
-            ),200);
+            ),404);
         }
         
     }

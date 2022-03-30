@@ -71,7 +71,7 @@ class Admin_api extends REST_Controller
           $this->response(array(
             "status" => 0,
             "message" => "Email or Password is incorrect"
-          ),200);
+          ),401);
         }
   
         else 
@@ -101,7 +101,7 @@ class Admin_api extends REST_Controller
             $this->response(array(
               "status" => 0,
               "message" => "Email or Password is incorrect"
-            ),404);
+            ),401);
           }
        }
       }
@@ -204,7 +204,7 @@ class Admin_api extends REST_Controller
         $this->response(array(
           "status" => 0,
           "error" => $error
-        ),500);
+        ),401);
       }
     }
 
@@ -213,7 +213,7 @@ class Admin_api extends REST_Controller
       $this->response(array(
         "status" => 0,
         "error" => "Please provide a jwt token in the header to make an API request"
-      ),500);
+      ),404);
     }
 
    if($user_id > 0 && $email != '')
@@ -366,7 +366,7 @@ class Admin_api extends REST_Controller
         $this->response(array(
           "status" => 0,
           "error" => $error
-        ),500);
+        ),401);
       }
     }
 
@@ -403,7 +403,7 @@ class Admin_api extends REST_Controller
         $this->response(array(
         "status" => 0,
         "message" => "Unable to delete! Please try again"
-        ),200);
+        ),500);
       }
     }
 
@@ -412,7 +412,7 @@ class Admin_api extends REST_Controller
       $this->response(array(
         "status" => 0,
         "error" => "Please provide a jwt token in the header to make an API request"
-      ),500);
+      ),404);
     }
 
   }
