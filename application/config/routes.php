@@ -16,6 +16,7 @@ $route['api/admin/users'] = 'api/v1/admin_api/all_users';
 $route['api/admin/update-user'] = 'api/v1/admin_api/update_user';
 $route['api/admin/delete-user'] = 'api/v1/admin_api/delete_user';
 
+
 //========================== v1 Task API ===================================
 $route['api/user/tasks'] = 'api/v1/tasks_api/list_task';
 $route['api/user/add-task'] = 'api/v1/tasks_api/add_task';

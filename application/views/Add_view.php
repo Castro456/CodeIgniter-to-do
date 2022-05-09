@@ -7,6 +7,7 @@
     <base href="<?= base_url(); ?>"> 
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/global.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="icon" type="image/png"  href="images/todoapp.png"> 
     <title>To-Do List</title>
@@ -34,7 +35,7 @@
 
 <div class="container">
 <div class="d-flex justify-content-center">
-<form class="add-container" action="add/user_task" method="post">
+<form class="add-container">
 
 <div class="form-group">
 <textarea cols='40' rows='3' class="textarea" name="task" id="text" ></textarea>
@@ -57,5 +58,9 @@
 </div>
 </div>
 
+<script src="./js/jquery.js"></script>
+<script src="./js/add.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.js.map"></script>
 </body>
 </html>

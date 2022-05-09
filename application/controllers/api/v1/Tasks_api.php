@@ -80,7 +80,12 @@ class Tasks_api extends REST_Controller
 
         if(!empty($task))
         {
-            if( ! empty($this->token['Authorization']) )  // Header name should be 'Authorization'
+            if ($this->session->userdata('user_validated') == true)
+            {
+                $user_id = $this->session->userdata('user_id');
+            }
+
+            elseif( ! empty($this->token['Authorization']) )  // Header name should be 'Authorization'
             {
                 $token = $this->token['Authorization']; 
                 $token = trim($token);
@@ -92,23 +97,6 @@ class Tasks_api extends REST_Controller
                 {
                     $decode_token = JWT::decode($token,$secret_key);
                     $user_id = $decode_token->user_id;
-                    $task_data = $this->tasks_model->add_task($user_id,$task);
-    
-                    if ($task_data == TRUE) 
-                    {
-                        $this->response(array(
-                            "status"=> "1",
-                            "message"=> "Task added successfully",
-                        ),200);
-                    }
-    
-                    else 
-                    {
-                        $this->response(array(
-                            "status"=> "0",
-                            "message"=> "No Task added. Please try again!"
-                        ),500);
-                    }
                 }
                 catch(Exception $e)
                 {
@@ -119,12 +107,30 @@ class Tasks_api extends REST_Controller
                     ),401);
                 }
             }
-            else
+            if ($user_id > 0) 
+            {
+                $task_data = $this->tasks_model->add_task($user_id,$task);
+                if ($task_data == TRUE) 
+                {
+                    $this->response(array(
+                        "status"=> "1",
+                        "message"=> "Task added successfully",
+                    ),200);
+                }
+                else 
+                {
+                    $this->response(array(
+                        "status"=> "0",
+                        "message"=> "No Task added. Please try again!"
+                    ),500);
+                }
+            }
+            else 
             {
                 $this->response(array(
-                    "status" => 0,
-                    "error" => "Please provide a jwt token in the header to make an API request"
-                ),404);
+                    "status"=> "0",
+                    "message"=> "Please provide a jwt token in the header to make an API request"
+                ),500);
             }
         }
         else

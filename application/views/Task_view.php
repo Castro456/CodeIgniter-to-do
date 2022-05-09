@@ -43,7 +43,7 @@
 <th colspan="9" ><h1 class="taskcenter">Tasks</h1></th>
 </tr >
 <tr>
-  <th class="taskcenter" scope="col">No</th>
+  <th class="taskcenter" scope="col">Id</th>
   <th class="taskcenter" scope="col">Task</th>
   <th class="taskcenter" scope="col">Date</th>
   <th class="taskcenter" scope="col">Time</th>
@@ -68,7 +68,7 @@ if (empty($message)) {
   <tr id= "<?php   echo $rows->id ?>">
 
   <!-- Datum -->
-  <td class="table-light taskcenter" data-target="id"><?php echo $i ?></td>
+  <td class="table-light taskcenter" data-target="id"><?php echo $rows->id ?></td>
   <td class="table-light taskcenter" data-target="task"><?php echo $rows->task ?></td>
   <td class="table-light taskcenter" data-target="date"><?php echo date("d/m/Y", strtotime($rows->time_kept)) ?></td>
   <td class="table-light taskcenter" data-target="time"><?php echo date("H:i", strtotime($rows->time_kept)) ?></td>
