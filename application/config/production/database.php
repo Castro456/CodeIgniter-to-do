@@ -79,7 +79,7 @@ $db['default'] = array(
 	'username' => 'Programmer',
 	'password' => 'Giveaccessto$$456',
 	'database' => 'tododb',
-	'dbdriver' => 'mysqli',
+	'dbdriver' => 'postgre',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
