@@ -25,10 +25,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 // For Docker
-$config['base_url'] = 'http://localhost:4006/';
+// $config['base_url'] = 'http://localhost:4006/';
 
 // For Localhost
-// $config['base_url'] = 'http://localhost/todo/';
+$config['base_url'] = 'http://localhost/todo/';
 
 /*
 |--------------------------------------------------------------------------

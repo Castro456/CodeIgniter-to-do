@@ -77,19 +77,19 @@ $db['default'] = array(
 	'dsn'	=> '',
 
 	// Settings for running this app in Docker
-	'hostname' => 'todoappdb', // Hostname of the database server, So the container name of the mysql is todoappdb.
-	'username' => 'root',
-	'password' => 'giveaccess',
-	'database' => 'tododb',
-	'dbdriver' => 'mysqli',
+	// 'hostname' => 'todoappdb', // Hostname of the database server, So the container name of the mysql is todoappdb.
+	// 'username' => 'root',
+	// 'password' => 'giveaccess',
+	// 'database' => 'tododb',
+	// 'dbdriver' => 'mysqli',
 	// End
 	
 	//Settings for running this app in Localhost
-	// hostname' => 'localhost', 
-	// 'username' => '<your username>',
-	// 'password' => '<your password>',
-	// 'database' => 'tododb',
-	// 'dbdriver' => 'mysqli',
+	'hostname' => 'localhost:8111', 
+	'username' => 'root',
+	'password' => 'giveaccess',
+	'database' => 'mydata',
+	'dbdriver' => 'mysqli',
 	// End
 
 	'dbprefix' => '',
