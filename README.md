@@ -49,13 +49,11 @@ To-Do list application lets user to track there daily tasks.
     Hostname/IP: 127.0.0.1
     Port: 3306              
   ```
-- Click **open** and create a database, name it as **geebugs_fe_db**.
-- Setup the Basic Database with the dump file ***geebugs_fe_db.sql***.
 
 # To Run the Application
 - Open Chrome and enter this url
   ```
-    http://localhost:5002/geebugs-frontend
+    http://localhost:5002
   ```
 
 # Note
