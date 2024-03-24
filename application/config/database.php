@@ -85,10 +85,10 @@ $db['default'] = array(
 	// End
 	
 	//Settings for running this app in Localhost
-	'hostname' => 'localhost:8111', 
+	'hostname' => 'localhost', 
 	'username' => 'root',
-	'password' => 'giveaccess',
-	'database' => 'mydata',
+	'password' => 'password',
+	'database' => 'tododb',
 	'dbdriver' => 'mysqli',
 	// End
 

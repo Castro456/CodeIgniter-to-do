@@ -1,13 +1,9 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
   #RewriteBase /
-
+ 
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteRule ^ index.php [QSA,L]
 </IfModule>
 
-<IfModule mod_env.c>
-    SetEnv CI_ENV development
-    #SetEnv CI_ENV testing
-    #SetEnv CI_ENV production
-</IfModule>
+# Do not change/modify this file without prior knowlege, if changed first check the application works fine.

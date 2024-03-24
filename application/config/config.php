@@ -24,7 +24,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 
-$config['base_url'] = 'https://castro-to-do-list.herokuapp.com/';
+// For Docker
+// $config['base_url'] = 'http://localhost:4006/';
+
+// For Localhost Ubuntu
+$config['base_url'] = 'http://localhost/Projects/CodeIgniter-to-do/';
 
 /*
 |--------------------------------------------------------------------------
@@ -53,7 +57,7 @@ $config['index_page'] = '';
 |
 | WARNING: If you set this to 'PATH_INFO', URIs will always be URL-decoded!
 */
-$config['uri_protocol']	= 'AUTO';
+$config['uri_protocol']	= 'REQUEST_URI';
 
 /*
 |--------------------------------------------------------------------------
