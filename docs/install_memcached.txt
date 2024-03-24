@@ -1,0 +1,27 @@
+-------------------------------For Ubuntu----------------------------------
+
+Initial installation:
+sudo apt-get install memcached
+
+Check status:
+systemctl status memcached
+
+Stats:
+nano /etc/memcached.conf
+
+Chech on terminal:
+telnet localhost 11211
+
+set key 0 0 6 [0-flag, 0-expiration, 6-bytes (each character in 1 byte)]
+carrot
+
+get key
+output:
+carrot
+
+Escape command: ctrl + ]
+then quit
+
+Imp: For CodeIgniter install this package:
+sudo apt-get install php-memcached
+sudo systemctl restart apache2 [Restart apache server to take effect]
